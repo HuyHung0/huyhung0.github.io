@@ -67,7 +67,7 @@ main a:hover:not(.button){ text-decoration: underline; }
 }
 .skip:focus-visible{ transform:none; opacity:1; pointer-events:auto; text-decoration:none }
 
-/* Header (z-index raised so menu is clickable) */
+/* Header */
 header{
   position:fixed; top:0; left:0; right:0; z-index:1200; height:var(--nav-h);
   display:flex; align-items:center;
@@ -97,13 +97,12 @@ header{
     display:none; position:fixed; right:clamp(16px,4vw,24px); top:calc(var(--nav-h) + env(safe-area-inset-top, 0px) - 6px);
     width:min(92vw, 420px);
     flex-direction:column; align-items:flex-start; gap:4px;
-    background:#0e1016; /* solid */
+    background:#0e1016;
     padding:18px 18px 20px; border:1px solid rgba(255,255,255,.14); border-radius:14px; box-shadow:var(--shadow)
   }
   header[data-open="true"] .menu{display:flex; animation:fade-up var(--dur-3) var(--easing) both}
   .hamburger{display:inline-grid; place-items:center}
 
-  /* MOBILE MENU LINKS (updated: use var(--text), no text-shadow) */
   .menu a{
     color:var(--text);
     font-size:1.06rem;
@@ -121,7 +120,22 @@ header{
   }
 }
 
-/* Scrim (below header) */
+/* Light-mode override for mobile menu (improves readability) */
+@media (prefers-color-scheme: light) and (max-width:860px){
+  header[data-open="true"] .menu{
+    background:#ffffff;
+    border:1px solid rgba(0,0,0,.08);
+    box-shadow:0 10px 28px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.05);
+  }
+  .menu a{
+    color:var(--text);
+  }
+  html.nav-open .nav-scrim{
+    background:rgba(0,0,0,.35);
+  }
+}
+
+/* Scrim */
 .nav-scrim{
   position: fixed;
   inset: 0;
@@ -236,7 +250,7 @@ html.nav-open .nav-scrim{
 /* Reveal on scroll */
 .reveal{opacity:0; transform:translateY(14px) scale(.98)}
 .reveal.in-view{animation: fade-up var(--dur-3) var(--easing) forwards}
-@keyframes fade-up{from{opacity:0; transform:translateY(14px) scale(.98)} to{opacity:1; transform:translateY(0) scale(1)}
+@keyframes fade-up{from{opacity:0; transform:translateY(14px) scale(.98)} to{opacity:1; transform:translateY(0) scale(1)}}
 
 /* Footer */
 footer{border-top:1px solid var(--border)}
