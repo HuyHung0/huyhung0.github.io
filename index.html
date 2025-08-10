@@ -1,396 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <meta name="description" content="This is the personal website of Huy Hung LE." />
-    <meta name="author" content="Huy Hung LE" />
+  <title>Huy Hung Le — Cybersecurity & Red Teaming</title>
+  <meta name="description" content="Personal website of Huy Hung Le — cybersecurity practitioner focused on penetration testing and red teaming; MSc in Digital Security (EURECOM, 2024) and PhD in Mathematics (2021)." />
+  <meta name="author" content="Huy Hung Le" />
+  <link rel="canonical" href="https://huyhung0.github.io/" />
+  <meta name="theme-color" content="#0b57d0" />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Huy Hung LE" />
-    <meta property="og:site_name" content="Hung's website" />
-    <meta property="og:url" content="https://HuyHung0.github.io/" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="This is the personal website of Huy Hung LE." />
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Huy Hung Le" />
+  <meta property="og:description" content="Cybersecurity practitioner focused on penetration testing and red teaming." />
+  <meta property="og:site_name" content="Huy Hung Le" />
+  <meta property="og:url" content="https://huyhung0.github.io/" />
+  <meta property="og:image" content="/images/lehung.jpg" />
+  <meta property="og:locale" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="canonical" href="https://HuyHung0.github.io/" />
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"Huy Hung Le",
+    "jobTitle":"Cybersecurity Practitioner",
+    "url":"https://huyhung0.github.io/",
+    "image":"https://huyhung0.github.io/images/lehung.jpg",
+    "sameAs":[
+      "https://github.com/huyhung0",
+      "https://www.linkedin.com/in/huy-hung-le-9685b2161/",
+      "https://lichess.org/@/lehuyhung",
+      "https://ratings.fide.com/profile/551078511"
+    ]
+  }
+  </script>
 
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #111217;
+      --card: #151823;
+      --text: #e6e8ee;
+      --muted: #aab0c0;
+      --accent: #2f6df6;
+      --accent-2: #60a5fa;
+      --border: #232636;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+      --maxw: 1100px;
+      --nav-h: 72px;
 
-    <title>Hung's website</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+      /* Motion tokens */
+      --easing: cubic-bezier(.22,.61,.36,1);
+      --dur-1: 120ms;
+      --dur-2: 200ms;
+      --dur-3: 520ms;
+      --lift: translateY(-4px);
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #ffffff;
+        --surface: #f8fafc;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --accent: #2563eb;
+        --accent-2: #3b82f6;
+        --border: #e2e8f0;
+        --shadow: 0 10px 30px rgba(2,6,23,.06);
+      }
+    }
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    html { scroll-padding-top: var(--nav-h); }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(1200px 800px at 10% -10%, rgba(47,109,246,.15), transparent 50%),
+        radial-gradient(1000px 600px at 100% 10%, rgba(96,165,250,.12), transparent 40%),
+        var(--bg);
+      color: var(--text);
+      font: 17px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    @media (max-width: 420px) { body { font-size: 16px; } }
+
+    a { color: var(--accent-2); text-decoration: none; transition: color var(--dur-1) var(--easing); }
+    a:hover { text-decoration: underline; }
+    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: 20px; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+
+    /* Skip link */
+    .skip { position: absolute; left: -9999px; }
+    .skip:focus { left: 12px; top: 12px; background: var(--accent); color: #fff; padding: 8px 12px; border-radius: 8px; z-index: 9999; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(140%) blur(8px);
+      background: color-mix(in oklab, var(--surface), transparent 20%);
+      border-bottom: 1px solid var(--border);
+      height: var(--nav-h);
+      display: flex; align-items: center;
+      transition: background var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .3px; }
+    .brand .dot {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+      box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent), transparent 80%);
+      animation: pulse 2.4s var(--easing) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent), transparent 80%); }
+      50% { transform: scale(1.05); box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent), transparent 86%); }
+    }
+
+    .menu { display: flex; align-items: center; gap: 20px; }
+    .menu a {
+      color: var(--muted); font-weight: 600; position: relative; padding-bottom: 2px;
+    }
+    /* sliding underline */
+    .menu a::after {
+      content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--dur-2) var(--easing);
+    }
+    .menu a:hover::after, .menu a[aria-current="page"]::after { transform: scaleX(1); }
+    .menu a[aria-current="page"] { color: var(--text); }
+
+    .button {
+      display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px;
+      border: 1px solid var(--border); background: var(--card); color: var(--text); font-weight: 600;
+      box-shadow: var(--shadow);
+      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing), background-color var(--dur-2) var(--easing);
+    }
+    .button:hover { transform: var(--lift); box-shadow: 0 14px 34px rgba(0,0,0,.35); }
+    .button.primary { background: linear-gradient(180deg, color-mix(in oklab,var(--accent),white 10%), var(--accent)); border: none; color: #fff; }
+
+    .hamburger { display: none; background: none; border: 1px solid var(--border); color: var(--text); font-size: 1rem; width: 40px; height: 40px; border-radius: 10px; transition: transform var(--dur-2) var(--easing); }
+    .hamburger:hover { transform: var(--lift); }
+    @media (max-width: 860px) {
+      .menu { display: none; position: absolute; right: 20px; top: calc(var(--nav-h) - 6px); flex-direction: column; align-items: flex-start; background: var(--card); padding: 16px; border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); }
+      header[data-open="true"] .menu { display: flex; animation: fade-up var(--dur-3) var(--easing) both; }
+      .hamburger { display: inline-grid; place-items: center; }
+    }
+
+    /* Sections (full-width backgrounds with centered content) */
+    .section { padding: 60px 0; }
+    .section + .section { padding-top: 48px; }
+    .section.alt { background: color-mix(in oklab, var(--surface), transparent 6%); }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+    .hero h1 { font-size: clamp(2rem, 2.4rem + 1.1vw, 3.6rem); line-height: 1.1; margin: 0 0 12px; }
+    .tagline { color: var(--muted); font-size: 1.08rem; margin-bottom: 22px; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Avatar card (bigger + hover) */
+    .avatar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 26px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 22px; align-items: center;
+      transition: transform var(--dur-3) var(--easing), box-shadow var(--dur-3) var(--easing), border-color var(--dur-2) var(--easing);
+      will-change: transform;
+    }
+    .avatar-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(0,0,0,.38);
+      border-color: color-mix(in oklab, var(--accent), var(--border) 60%);
+    }
+    .avatar-card img {
+      width: 170px; height: 170px; border-radius: 22px; object-fit: cover; border: 1px solid var(--border);
+      transition: transform var(--dur-3) var(--easing), box-shadow var(--dur-3) var(--easing);
+    }
+    .avatar-card:hover img { transform: scale(1.02); }
+
+    .avatar-card .links { font-size: 1rem; }
+    .inline-icons a { display: inline-flex; align-items: center; gap: 10px; color: var(--text); transition: transform var(--dur-2) var(--easing), color var(--dur-2) var(--easing); }
+    .inline-icons a:hover { color: var(--accent-2); transform: translateX(2px); }
+    .inline-icons svg { width: 22px; height: 22px; opacity: .95; flex: 0 0 22px; }
+
+    @media (max-width: 920px) {
+      .avatar-card { grid-template-columns: 150px 1fr; }
+      .avatar-card img { width: 150px; height: 150px; }
+    }
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; }
+      .avatar-card { grid-template-columns: 120px 1fr; }
+      .avatar-card img { width: 120px; height: 120px; }
+    }
+
+    /* Content elements */
+    .section-title { font-size: 1.45rem; margin: 0 0 18px; letter-spacing: .2px; }
+    .grid { display: grid; gap: 18px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
+      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing);
+    }
+    .card:hover { transform: var(--lift); box-shadow: 0 18px 38px rgba(0,0,0,.35); border-color: color-mix(in oklab, var(--accent), var(--border) 70%); }
+    .card h3, .card h4 { margin: 0 0 8px; }
+    .meta { color: var(--muted); font-size: .95rem; }
+    .bullets { margin: 10px 0 0; padding-left: 20px; }
+
+    /* Timeline */
+    .timeline { display: grid; gap: 14px; }
+    .timeline-item {
+      display: grid; grid-template-columns: 150px 1fr; gap: 18px; align-items: start; padding: 16px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow);
+      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing);
+    }
+    .timeline-item:hover { transform: var(--lift); box-shadow: 0 18px 38px rgba(0,0,0,.35); border-color: color-mix(in oklab, var(--accent), var(--border) 70%); }
+    .timeline-item .year { font-weight: 700; color: var(--muted); }
+    .timeline-item .place a { font-weight: 600; }
+    @media (max-width: 720px) { .timeline-item { grid-template-columns: 1fr; } }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); }
+    .foot { display: flex; align-items: center; justify-content: space-between; padding: 24px 0 40px; color: var(--muted); font-size: .98rem; }
+
+    /* Reveal on scroll */
+    .reveal { opacity: 0; transform: translateY(14px) scale(.98); }
+    .reveal.in-view { animation: fade-up var(--dur-3) var(--easing) forwards; }
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(14px) scale(.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  </style>
 </head>
 
-<body data-bs-spy="scroll" data-bs-target="#scrollspy-navbar" data-bs-root-margin="0px 0px -40%"
-    data-bs-smooth-scroll="true" class="scrollspy-example bg-body-tertiary p-3 rounded-2 my-5" tabindex="0">
+<body>
+  <a class="skip" href="#main">Skip to content</a>
 
-    <!-- Navbar -->
-    <div class="container">
-        <nav id="#scrollspy-navbar" class="navbar navbar-expand-md bg-dark border-bottom border-body fixed-top"
-            data-bs-theme="dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">Huy Hung LE</a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#scrollspyAbout">About</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#scrollspyEducation">Education</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#scrollspyProjects">Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#scrollspyCertifications">Certifications</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#scrollspyPublications">Publications</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="#scrollspyOther">Other activities and interests</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="https://huyhung0.github.io/notes">Notes</a>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </nav>
+  <header id="top">
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <div class="brand"><span class="dot" aria-hidden="true"></span><span>Huy Hung Le</span></div>
+      <nav class="menu" id="nav-menu">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#certifications">Certifications</a>
+        <a href="#publications">Publications</a>
+        <a href="#activities">Activities</a>
+        <a href="/notes">Notes</a>
+      </nav>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">☰</button>
     </div>
+  </header>
 
-    <!-- About + pictures -->
-    <div class="container my-5">
-        <h2 id="scrollspyAbout">About</h2>
-
-        <div class="row py-2">
-            <div class="col-md-3 py-2">
-                <img class="img-fluid rounded mx-auto d-block" src="/images/lehung.jpg" alt="Huy Hung LE's photo" />
-                <div style="text-align:left">
-                    <i class="fa fa-github" style="font-size:24px"></i><a
-                        href="https://github.com/huyhung0">Github</a><br>
-                    <i class="fa fa-linkedin" style="font-size:24px"></i> <a
-                        href="https://www.linkedin.com/in/huy-hung-le-9685b2161/">Linkedin</a><br>
-                    Email: <br>
-                    lehuyhung94@gmail.com <br>
-                    huy-hung.le@eurecom.fr
-
-                </div>
-
-
-
-            </div>
-
-            <div class="col-md-8 my-2">
-                <p>I'm Huy Hung LE, commonly known as "Hung".</p>
-                <p>
-                    My primary interests within cybersecurity include Penetration Tester and Red Teaming.
-
-                    Currently, I am in the final year of Master in Digital Security at Eurecom (graduating 2024). I also had a PhD degree in Mathematics in 2021.
-                <p>
-                    In my free time, I love to play table tennis and
-                    chess.
-                </p>
-            </div>
-
-
+  <main id="main">
+    <!-- Hero -->
+    <section class="section reveal" id="about">
+      <div class="container hero">
+        <div>
+          <h1>Cybersecurity & Red Teaming</h1>
+          <p class="tagline">I'm Hung — a cybersecurity practitioner focused on penetration testing, red teaming, and software/firmware analysis. I hold an <strong>MSc in Digital Security</strong> (EURECOM, 2024) and a <strong>PhD in Mathematics</strong> (2021).</p>
+          <div class="cta">
+            <a class="button" href="https://github.com/huyhung0" target="_blank" rel="noopener">GitHub</a>
+            <a class="button" href="https://www.linkedin.com/in/huy-hung-le-9685b2161/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="button" href="/notes">Notes</a>
+          </div>
         </div>
-
-    </div>
+        <aside>
+          <div class="avatar-card">
+            <img src="/images/lehung.jpg" alt="Portrait of Huy Hung Le" />
+            <div class="links">
+              <div class="inline-icons">
+                <a href="mailto:lehuyhung94@gmail.com" rel="me" aria-label="Email: lehuyhung94@gmail.com">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="m22 6-10 7L2 6"/></svg>
+                  lehuyhung94@gmail.com
+                </a>
+              </div>
+              <div class="inline-icons">
+                <a href="mailto:huy-hung.le@eurecom.fr" aria-label="Email: huy-hung.le@eurecom.fr">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a 2 2 0 0 1 2-2Z"/><path d="m22 6-10 7L2 6"/></svg>
+                  huy-hung.le@eurecom.fr
+                </a>
+              </div>
+              <div class="inline-icons">
+                <a href="https://github.com/huyhung0" target="_blank" rel="noopener" aria-label="GitHub: huyhung0">
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12.7c0 5.4 3.5 10 8.4 11.6.6.1.8-.2.8-.5v-2c-3.4.7-4.1-1.6-4.1-1.6-.5-1.2-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.7 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.4-5.5-6.1 0-1.3.5-2.4 1.2-3.3 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.1 0c2.4-1.5 3.4-1.2 3.4-1.2.7 1.7.2 2.9.2 3.2.8.9 1.2 2 1.2 3.3 0 4.7-2.8 5.8-5.5 6.1.4.3.8 1 .8 2v3c0 .3.2.6.8.5 4.9-1.6 8.4-6.2 8.4-11.6A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                  github.com/huyhung0
+                </a>
+              </div>
+              <div class="inline-icons">
+                <a href="https://www.linkedin.com/in/huy-hung-le-9685b2161/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
+                  <!-- Clearer LinkedIn square icon -->
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path fill="#0A66C2" d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+                    <path fill="#FFFFFF" d="M5.337 7.433a1.77 1.77 0 1 1 0-3.54 1.77 1.77 0 0 1 0 3.54zM3.76 9h3.151v11.452H3.76V9zm7.395 0h3.025v1.561h.043c.422-.8 1.453-1.642 2.992-1.642 3.2 0 3.787 2.106 3.787 4.852v6.681h-3.046v-5.891c0-1.404-.028-3.211-2.008-3.211-2.01 0-2.317 1.571-2.317 3.101v6.001H11.155V9z"/>
+                  </svg>
+                  LinkedIn
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
 
     <!-- Education -->
-    <div class="container my-5">
-        <h2 id="scrollspyEducation">Education</h2>
-        <div class="col-11">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Year</th>
-                        <th scope="col">Place</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>2022-now</td>
-                        <td>
-                            <a
-                                href="https://www.eurecom.fr/en/teaching/master-computer-science/msc-computer-science-digital-security-track">Master
-                                in Digital Security</a> at <a href="https://www.eurecom.fr/en">Eurecom</a>, Biot,
-                            France
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2018-2021</td>
-                        <td>
-                            PhD in Mathematics at <a href="https://www.unicaen.fr/">Universite de Caen
-                                Normandie</a>, Caen, France
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2017-2018</td>
-                        <td>
-                            Master two in Mathematics at <a href="https://www-fourier.ujf-grenoble.fr/">Institut
-                                Fourier</a>,
-                            Grenoble, France
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2016-2017</td>
-                        <td>
-                            Master one in Mathematics at <a
-                                href="http://math.ac.vn/en/trang-chu/gioi-thieu-vien-toan.html">Institute of
-                                Mathematics</a>, Hanoi, Vietnam
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2012-2016</td>
-                        <td>
-                            Bachelor in Mathematics at <a href="https://hus.vnu.edu.vn/">University of
-                                Science</a>, Hanoi, Vietnam
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2009-2012</td>
-                        <td>
-                            High school at Tran Phu Gifted High School,
-                            Haiphong, Vietnam
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <section class="section alt reveal" id="education">
+      <div class="container">
+        <h2 class="section-title">Education</h2>
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <div class="year">2022–2024</div>
+            <div class="place">
+              <strong>MSc in Digital Security</strong> — <a href="https://www.eurecom.fr/en" target="_blank" rel="noopener">EURECOM</a>, Biot, France
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="year">2018–2021</div>
+            <div class="place">
+              <strong>PhD in Mathematics</strong> — <a href="https://www.unicaen.fr/" target="_blank" rel="noopener">Université de Caen Normandie</a>, Caen, France
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="year">2017–2018</div>
+            <div class="place">
+              <strong>M2 in Mathematics</strong> — <a href="https://www-fourier.ujf-grenoble.fr/" target="_blank" rel="noopener">Institut Fourier</a>, Grenoble, France
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="year">2016–2017</div>
+            <div class="place">
+              <strong>M1 in Mathematics</strong> — <a href="http://math.ac.vn/en/trang-chu/gioi-thieu-vien-toan.html" target="_blank" rel="noopener">Institute of Mathematics</a>, Hanoi, Vietnam
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="year">2012–2016</div>
+            <div class="place">
+              <strong>BSc in Mathematics</strong> — <a href="https://hus.vnu.edu.vn/" target="_blank" rel="noopener">University of Science</a>, Hanoi, Vietnam
+            </div>
+          </div>
+          <div class="timeline-item reveal">
+            <div class="year">2009–2012</div>
+            <div class="place">
+              <strong>High School</strong> — Tran Phu Gifted High School, Haiphong, Vietnam
+            </div>
+          </div>
         </div>
-
-    </div>
+      </div>
+    </section>
 
     <!-- Projects -->
-    <div class="container my-5">
-        <h2 id="scrollspyProjects">Projects</h2>
-
-        <div class="col-11 list-group">
-            <ul>
-                <li>
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Improve pestudio-cli tool</h5>
-                        <small> Jun 2023 - Jul 2023</small>
-                    </div>
-                    <a href="https://github.com/HuyHung0/pestudio-cli"
-                        class="link-opacity-25-hover">https://github.com/HuyHung0/pestudio-cli</a>
-                    <p class="mb-1">
-                        This is a project of Forensics course at
-                        Eurecom. <br />
-                        Pestudio-cli is a python-based command-line tool
-                        which can be used to check portable executable
-                        (PE) files for known malicious patterns. The
-                        tool stops working due to some changing in a
-                        library. <br />
-                        The project is to fix the tool, improve it with
-                        new databases and add a new feature named "Hole
-                        detection" to detect whether there is any data
-                        "outside" of sections in a PE file.
-                    </p>
-                </li>
-                <hr />
-                <li>
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">
-                            Security Analysis of Bluetooth Low Energy
-                            Over-the-air Firmware Updates
-                        </h5>
-                        <small>Mar 2023 - Jun 2023</small>
-                    </div>
-                    <a href="https://github.com/HuyHung0/Spring2023---Security-Analysis-Of-Bluetooth-Low-Energy-Over-The-Air-Firmware-Updates"
-                        class="link-opacity-25-hover">https://github.com/HuyHung0/Spring2023---Security-Analysis-Of-Bluetooth-Low-Energy-Over-The-Air-Firmware-Updates</a>
-                    <br>
-                    <a href="https://gitlab.eurecom.fr/lehh/spring2023-Security-analysis-of-Bluetooth-low-energy-Over-the-Air-firmware-updates"
-                        class="link-opacity-25-hover">https://gitlab.eurecom.fr/lehh/spring2023-Security-analysis-of-Bluetooth-low-energy-Over-the-Air-firmware-updates</a>
-
-                    <p class="mb-1">
-                        This is a semester project at Eurecom. <br />
-                        This project is to reverse engineering the
-                        protocol and analysis the securities of the
-                        firmware update processes over-the-air via
-                        Bluetooth Low Energy (BLE) of nrf51 and nrf52
-                        chips (from Nordic Semiconductor).
-                    </p>
-                </li>
-                <hr />
-                <li>
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Robot competition</h5>
-                        <small>Dec 2022 - Feb 2023</small>
-                    </div>
-                    <a href="https://github.com/HuyHung0/Robot-competition---group-3"
-                        class="link-opacity-25-hover">https://github.com/HuyHung0/Robot-competition---group-3</a> <br>
-                    <a href="https://gitlab.eurecom.fr/nguyenk/osrobot"
-                        class="link-opacity-25-hover">https://gitlab.eurecom.fr/nguyenk/osrobot</a><br />
-                    <a href="https://ikhwanjohari2.wixsite.com/mysite"
-                        class="link-opacity-25-hover">https://ikhwanjohari2.wixsite.com/mysite</a>
-                    <p class="mb-1">
-                        This is a project of Operating System (OS)
-                        course at EURECOM. <br />
-                        The project is to design and code an EV3
-                        Mindstorm Lego robot to play basketball as an
-                        attacker and also a defender. <br />
-                        We won the first prize.
-                    </p>
-                </li>
-
-                <hr />
-                <li>
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Koalert</h5>
-                        <small> Dec 2022 - Jan 2023 </small>
-                    </div>
-                    <a href="https://gitlab.com/jbuntu/koalert"
-                        class="link-opacity-25-hover">https://gitlab.com/jbuntu/koalert</a>
-                    <p class="mb-1">
-                        This is a project of Interaction Design and
-                        Development of Modern Web Applications (WebInt)
-                        course at Eurecom. <br />
-                        The project is to design a web application.
-                    </p>
-                </li>
-                <hr />
-                <li>
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">Cheating in Chess</h5>
-                        <small>Oct 2022 - Jan 2023</small>
-                    </div>
-                    <a href="https://gitlab.eurecom.fr/lehh/malis-project-cheating-in-chess"
-                        class="link-opacity-25-hover">https://gitlab.eurecom.fr/lehh/malis-project-cheating-in-chess</a><br />
-                    <a href="https://malis-course.github.io/2022/11/01/final-projects/"
-                        class="link-opacity-25-hover">https://malis-course.github.io/2022/11/01/final-projects/</a>
-                    <p class="mb-1">
-                        This is a project of Machine Learning and
-                        Intelligent Systems (MALIS) course at Eurecom.
-                        <br />
-                        We use machine learning to detect abnormally
-                        moves and games in chess. <br />
-                        Our project received an honorable mention among
-                        all the projects in the course during Fall 2022.
-                    </p>
-                </li>
+    <section class="section reveal" id="projects">
+      <div class="container">
+        <h2 class="section-title">Selected Projects</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+          <article class="card reveal">
+            <h3>pestudio-cli — PE Static Analysis</h3>
+            <p class="meta">June–July 2023 · <a href="https://github.com/HuyHung0/pestudio-cli" target="_blank" rel="noopener">GitHub</a></p>
+            <ul class="bullets">
+              <li>Revived a Python CLI to scan Portable Executable (PE) files for known malicious patterns.</li>
+              <li>Fixed breaking changes in dependencies and refreshed threat signature databases.</li>
+              <li>Added <em>hole detection</em> to flag data outside section boundaries; improved output and documentation.</li>
             </ul>
+          </article>
+
+          <article class="card reveal">
+            <h3>BLE OTA Firmware Update Security</h3>
+            <p class="meta">Mar–Jun 2023 · <a href="https://github.com/HuyHung0/Spring2023---Security-Analysis-Of-Bluetooth-Low-Energy-Over-The-Air-Firmware-Updates" target="_blank" rel="noopener">GitHub</a> · <a href="https://gitlab.eurecom.fr/lehh/spring2023-Security-analysis-of-Bluetooth-low-energy-Over-the-Air-firmware-updates" target="_blank" rel="noopener">GitLab</a></p>
+            <ul class="bullets">
+              <li>Reverse-engineered Nordic nRF51/nRF52 BLE DFU protocol and update workflow.</li>
+              <li>Assessed integrity/authentication of OTA updates; developed proof-of-concept analysis tooling.</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <h3>EV3 Basketball Robot — Winner</h3>
+            <p class="meta">Dec 2022–Feb 2023 · <a href="https://github.com/HuyHung0/Robot-competition---group-3" target="_blank" rel="noopener">GitHub</a> · <a href="https://gitlab.eurecom.fr/nguyenk/osrobot" target="_blank" rel="noopener">GitLab</a> · <a href="https://ikhwanjohari2.wixsite.com/mysite" target="_blank" rel="noopener">Project site</a></p>
+            <ul class="bullets">
+              <li>Designed and programmed an EV3 Mindstorms robot (attacker/defender); won first prize.</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <h3>Koalert — Web App Design</h3>
+            <p class="meta">Dec 2022–Jan 2023 · <a href="https://gitlab.com/jbuntu/koalert" target="_blank" rel="noopener">GitLab</a></p>
+            <ul class="bullets">
+              <li>End-to-end design and development for a modern web application prototype.</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <h3>Cheating in Chess — ML Outlier Detection</h3>
+            <p class="meta">Oct 2022–Jan 2023 · <a href="https://gitlab.eurecom.fr/lehh/malis-project-cheating-in-chess" target="_blank" rel="noopener">GitLab</a> · <a href="https://malis-course.github.io/2022/11/01/final-projects/" target="_blank" rel="noopener">Course showcase</a></p>
+            <ul class="bullets">
+              <li>Applied ML to detect anomalous moves/games; received an honorable mention (Fall 2022 cohort).</li>
+            </ul>
+          </article>
         </div>
-    </div>
+      </div>
+    </section>
 
-    <!-- Certificates -->
-    <div class="container my-5">
-        <h2 id="scrollspyCertifications">Certificates</h2>
-
-        <div class="col-11 list-group">
-            <li>
-                <a href="/resources/certificates/Project_Management_Certification.pdf" class="link-opacity-25-hover">
-                    Managing global projects</a>
-                <p class="mb-1">Issued by Eurecom on June 30, 2023</p>
-            </li>
-
-            <li>
-                <a href="https://www.udemy.com/certificate/UC-2593d711-0460-4729-86bb-76e063fe7dec/"
-                    class="link-opacity-25-hover">Practical Ethical Hacking - The Complete Course</a>
-                <p class="mb-1">Issued by Udemy on May 13, 2023</p>
-            </li>
-
-            <li>
-                <a href="https://www.udemy.com/certificate/UC-52ede5e0-c0de-4ff9-82c7-1f3b3ef97a60/"
-                    class="link-opacity-25-hover">
-                    Learn Ethical Hacking From Scratch
-                </a>
-                <p class="mb-1">Issued by Udemy on July 28, 2022</p>
-            </li>
-
-            <li>
-                <a href="https://www.udemy.com/certificate/UC-468167a4-48d1-4a75-ae67-2fd445cab40e/"
-                    class="link-opacity-25-hover">
-                    The Complete Python Bootcamp From Zero to Hero in
-                    Python
-                </a>
-                <p class="mb-1">Issued by Udemy on May 25, 2022</p>
-            </li>
+    <!-- Certifications -->
+    <section class="section alt reveal" id="certifications">
+      <div class="container">
+        <h2 class="section-title">Certifications</h2>
+        <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+          <article class="card reveal">
+            <h4><a href="/resources/certificates/Project_Management_Certification.pdf" target="_blank" rel="noopener">Managing Global Projects</a></h4>
+            <p class="meta">EURECOM · Issued Jun 30, 2023</p>
+          </article>
+          <article class="card reveal">
+            <h4><a href="https://www.udemy.com/certificate/UC-2593d711-0460-4729-86bb-76e063fe7dec/" target="_blank" rel="noopener">Practical Ethical Hacking</a></h4>
+            <p class="meta">Udemy · Issued May 13, 2023</p>
+          </article>
+          <article class="card reveal">
+            <h4><a href="https://www.udemy.com/certificate/UC-52ede5e0-c0de-4ff9-82c7-1f3b3ef97a60/" target="_blank" rel="noopener">Learn Ethical Hacking From Scratch</a></h4>
+            <p class="meta">Udemy · Issued Jul 28, 2022</p>
+          </article>
+          <article class="card reveal">
+            <h4><a href="https://www.udemy.com/certificate/UC-468167a4-48d1-4a75-ae67-2fd445cab40e/" target="_blank" rel="noopener">Complete Python Bootcamp: Zero to Hero</a></h4>
+            <p class="meta">Udemy · Issued May 25, 2022</p>
+          </article>
         </div>
-    </div>
+      </div>
+    </section>
 
     <!-- Publications -->
-    <div class="container my-5">
-        <h2 id="scrollspyPublications">Publications</h2>
+    <section class="section reveal" id="publications">
+      <div class="container">
+        <h2 class="section-title">Publications</h2>
+        <ul class="card pubs reveal">
+          <li>
+            Le, H.H. &amp; Ngo Dac, T. <strong><a href="https://doi.org/10.1007/s00209-022-02970-4" target="_blank" rel="noopener">Zeta-like multiple zeta values in positive characteristic</a></strong>, <em>Mathematische Zeitschrift</em>, 301(2), 2037–2057, 2022.
+          </li>
+          <li>
+            Le, H.H. &amp; Ngo Dac, T. <strong><a href="https://doi.org/10.1090/tran/8357" target="_blank" rel="noopener">On identities for zeta values in Tate algebras</a></strong>, <em>Transactions of the American Mathematical Society</em>, 374(08), 5623–5650, 2021.
+          </li>
+          <li>
+            Le, H.H. <strong><a href="https://www.theses.fr/2021NORMC237#" target="_blank" rel="noopener">On some identities between special values of L-functions</a></strong>, <em>PhD thesis</em>, 2021.
+          </li>
+        </ul>
+      </div>
+    </section>
 
-        <div class="col-11 list-group">
-            <li>
-                Le, H.H. and Ngo Dac, T.
-                <strong><a href="https://doi.org/10.1007/s00209-022-02970-4">Zeta-like multiple zeta values in
-                        positive
-                        characteristic
-                    </a></strong>, <em> Mathematische Zeitschrift</em>, 301(2),
-                2037-2057, published on February 11, 2022. DOI:
-                https://doi.org/10.1007/s00209-022-02970-4
-            </li>
-            <li>
-                Le, H.H. and Ngo Dac, T.
-                <strong><a href="https://doi.org/10.1090/tran/8357">On identities for zeta values in Tate
-                        algebras</a></strong>,
-                <em>
-                    Transactions of the American Mathematical
-                    Society</em>, 374(08), 5623-5650, published on April 27, 2021. DOI:
-                https://doi.org/10.1090/tran/8357
-            </li>
-            <li>LE, H.H. <strong><a href="https://www.theses.fr/2021NORMC237#">Οn sοme identities between special values
-                        οf L-functiοns</a></strong>, <em>PhD thesis</em>, defended on November 26, 2021.
-            </li>
+    <!-- Activities -->
+    <section class="section alt reveal" id="activities">
+      <div class="container">
+        <h2 class="section-title">Other Activities & Interests</h2>
+        <div class="card reveal">
+          <ul>
+            <li>Former member of a chess club in Caen (2018–2022); played in <a href="http://www.echecs.asso.fr/Equipes.aspx?Groupe=36" target="_blank" rel="noopener">Interclubs Nationale IV</a>. Profiles: <a href="https://ratings.fide.com/profile/551078511" target="_blank" rel="noopener">FIDE</a>, <a href="https://lichess.org/@/lehuyhung" target="_blank" rel="noopener">Lichess</a>.</li>
+            <li>Supervisor of a table tennis club at EURECOM.</li>
+            <li>CTFs: Tracs (Paris, 2022), Ph0wn (Biot, 2022), plus various online events.</li>
+          </ul>
         </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot">
+      <span>© <span id="year"></span> Huy Hung Le</span>
+      <a href="#top" class="button" aria-label="Back to top">↑ Back to top</a>
     </div>
+  </footer>
 
-    <!-- Other activities and interests -->
-    <div class="container my-5">
-        <h2 id="scrollspyOther">Other activities and interests</h2>
-        <div class="col-11 list-group">
-            <li>
-                I was a member of <a href="https://cavaliers-herouville.club/" class="link-opacity-25-hover">a chess
-                    club</a> in Caen from 2018 to 2022.
+  <script>
+    // Mobile nav toggle
+    const header = document.querySelector('header');
+    const btn = document.querySelector('.hamburger');
+    btn?.addEventListener('click', () => {
+      const open = header.getAttribute('data-open') === 'true';
+      header.setAttribute('data-open', String(!open));
+      btn.setAttribute('aria-expanded', String(!open));
+    });
 
-                I played for the club in <a href="http://www.echecs.asso.fr/Equipes.aspx?Groupe=36"
-                    class="link-opacity-25-hover">Interclubs Nationale IV chess team competition</a>. <br>
+    // Active menu highlight on scroll
+    const sections = ['about','education','projects','certifications','publications','activities']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+    const links = [...document.querySelectorAll('nav.menu a')];
 
-                I also participated in many other chess competitions both for team and individual.
-                <ul>
-                    <li><a href="https://ratings.fide.com/profile/551078511"
-                            class="link-opacity-25-hover">https://ratings.fide.com/profile/551078511</a></li>
-                    <li><a href="https://lichess.org/@/lehuyhung"
-                            class="link-opacity-25-hover">https://lichess.org/@/lehuyhung</a></li>
-                    <li><a href="https://cavaliers-herouville.club/"
-                            class="link-opacity-25-hover">https://cavaliers-herouville.club/</a></li>
-                </ul>
-            </li>
-            <li>
-                Currently I am a supervisor of a table tennis club in Eurecom.
-            </li>
+    const ioActive = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          links.forEach(a => a.removeAttribute('aria-current'));
+          const active = links.find(a => a.getAttribute('href') === '#' + id);
+          if (active) active.setAttribute('aria-current', 'page');
+        }
+      });
+    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0.01 });
+    sections.forEach(s => ioActive.observe(s));
 
-            <li>
-                I also participated in some CTFs: Tracs (Paris, 2022), Ph0wn (Biot, 2022) and other online CTFs.
-            </li>
-        </div>
-    </div>
+    // Reveal-on-scroll
+    const revealables = document.querySelectorAll('.reveal');
+    const ioReveal = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -10% 0px' });
+    revealables.forEach(el => ioReveal.observe(el));
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
-
 </html>
