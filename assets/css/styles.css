@@ -104,6 +104,41 @@ header{
   .hamburger{display:inline-grid; place-items:center}
 }
 
+/* Improved mobile menu contrast / blur */
+@media (max-width:860px){
+  header[data-open="true"] .menu{ display:flex; }
+  .menu{
+    z-index:1001;
+    /* Refined backdrop: reduce excessive blur & increase opacity for contrast */
+    background:rgba(14,16,22,.95);
+    -webkit-backdrop-filter:blur(6px) saturate(140%);
+    backdrop-filter:blur(6px) saturate(140%);
+    border:1px solid rgba(255,255,255,.12);
+  }
+  /* Stronger link contrast inside menu */
+  .menu a{ color:var(--text); }
+}
+
+/* Fallback when backdrop-filter NOT supported */
+@supports not ((backdrop-filter:blur(4px)) or (-webkit-backdrop-filter:blur(4px))){
+  @media (max-width:860px){
+    .menu{
+      background:#0e1016 !important;
+      -webkit-backdrop-filter:none !important;
+      backdrop-filter:none !important;
+    }
+  }
+}
+
+/* Optional: class-based fallback (if JS adds html.no-backdrop) */
+html.no-backdrop @media (max-width:860px){
+  .menu{
+    background:#0e1016;
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+}
+
 /* Sections */
 .section{padding:60px 0}
 .section + .section{padding-top:48px}
@@ -172,7 +207,7 @@ header{
 .meta{color:var(--muted); font-size:.95rem}
 .bullets{margin:10px 0 0; padding-left:20px}
 
-/* Ensure grid columns adapt (override inline grid styles if present) */
+/* Ensure grid columns adapt */
 #projects .grid{ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; }
 #certifications .grid{ grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important; }
 #publications .grid{ grid-template-columns: 1fr !important; }
@@ -213,8 +248,6 @@ footer{border-top:1px solid var(--border)}
   .foot{ flex-direction:column; align-items:flex-start; gap:8px; }
 }
 
-/* Anim util */
-@keyframes fade-up{from{opacity:0; transform:translateY(14px) scale(.98)} to{opacity:1; transform:translateY(0) scale(1)}}
 /* Full-screen scrim behind the mobile menu */
 .nav-scrim{
   position: fixed;
@@ -232,17 +265,6 @@ html.nav-open .nav-scrim{
   pointer-events: auto;
 }
 
-/* Make the mobile menu more opaque and above scrim */
-@media (max-width: 860px){
-  header[data-open="true"] .menu{ display:flex; }
-  .menu{
-    z-index: 1001; /* above .nav-scrim */
-    background: rgba(8, 12, 20, .88); /* stronger than --glass-strong */
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,.12);
-  }
-}
 @media (prefers-reduced-motion: no-preference){
   html { scroll-behavior: smooth; }
 }
