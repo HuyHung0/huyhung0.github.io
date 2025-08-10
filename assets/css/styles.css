@@ -215,3 +215,31 @@ footer{border-top:1px solid var(--border)}
 
 /* Anim util */
 @keyframes fade-up{from{opacity:0; transform:translateY(14px) scale(.98)} to{opacity:1; transform:translateY(0) scale(1)}}
+/* Full-screen scrim behind the mobile menu */
+.nav-scrim{
+  position: fixed;
+  inset: 0;
+  background: rgba(6, 10, 20, .55);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--dur-2) var(--easing);
+  z-index: 1000; /* below the menu, above page content */
+}
+html.nav-open .nav-scrim{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Make the mobile menu more opaque and above scrim */
+@media (max-width: 860px){
+  header[data-open="true"] .menu{ display:flex; }
+  .menu{
+    z-index: 1001; /* above .nav-scrim */
+    background: rgba(8, 12, 20, .88); /* stronger than --glass-strong */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,.12);
+  }
+}

@@ -1,14 +1,32 @@
 'use strict';
 
-// Mobile nav toggle + prevent background scrolling on small screens
+'use strict';
+
+// Mobile nav toggle + scrim + no background scroll
 const header = document.querySelector('header');
 const btn = document.querySelector('.hamburger');
+const scrim = document.querySelector('.nav-scrim');
+
+function setMenuOpen(open){
+  header.setAttribute('data-open', String(open));
+  btn?.setAttribute('aria-expanded', String(open));
+  document.documentElement.classList.toggle('nav-open', open);
+}
+
 btn?.addEventListener('click', () => {
   const open = header.getAttribute('data-open') === 'true';
-  header.setAttribute('data-open', String(!open));
-  btn.setAttribute('aria-expanded', String(!open));
-  document.documentElement.classList.toggle('nav-open', !open);
+  setMenuOpen(!open);
 });
+
+// Close when clicking a nav link (good on phones)
+document.querySelectorAll('nav.menu a').forEach(a => {
+  a.addEventListener('click', () => setMenuOpen(false));
+});
+
+// Close when tapping the scrim or pressing Escape
+scrim?.addEventListener('click', () => setMenuOpen(false));
+window.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenuOpen(false); });
+
 
 // Close mobile menu after clicking a link (good on phones)
 const navLinksAll = [...document.querySelectorAll('nav.menu a')];
