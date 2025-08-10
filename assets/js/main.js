@@ -1,13 +1,22 @@
 'use strict';
 
-// Mobile nav toggle
+// Mobile nav toggle + prevent background scrolling on small screens
 const header = document.querySelector('header');
 const btn = document.querySelector('.hamburger');
 btn?.addEventListener('click', () => {
   const open = header.getAttribute('data-open') === 'true';
   header.setAttribute('data-open', String(!open));
   btn.setAttribute('aria-expanded', String(!open));
+  document.documentElement.classList.toggle('nav-open', !open);
 });
+
+// Close mobile menu after clicking a link (good on phones)
+const navLinksAll = [...document.querySelectorAll('nav.menu a')];
+navLinksAll.forEach(a => a.addEventListener('click', () => {
+  header.setAttribute('data-open', 'false');
+  document.documentElement.classList.remove('nav-open');
+  btn?.setAttribute('aria-expanded', 'false');
+}));
 
 // Reveal-on-scroll
 const revealables = document.querySelectorAll('.reveal');
@@ -38,7 +47,6 @@ function setActive(){
   const y = window.scrollY;
   let current = sectionsData[0]?.id;
   for (const s of sectionsData){ if (y >= s.top) current = s.id; else break; }
-  // If at bottom, ensure last section is active
   if (window.innerHeight + y >= document.body.scrollHeight - 2) {
     current = sectionsData[sectionsData.length - 1]?.id;
   }
@@ -51,7 +59,6 @@ window.addEventListener('scroll', onScroll, { passive: true });
 window.addEventListener('resize', () => { recalcSections(); setActive(); });
 window.addEventListener('orientationchange', () => { recalcSections(); setActive(); });
 window.addEventListener('load', () => { recalcSections(); setActive(); });
-// after fonts load (positions can shift)
 if (document.fonts && document.fonts.ready) { document.fonts.ready.then(() => { recalcSections(); setActive(); }); }
 
 // Footer year
