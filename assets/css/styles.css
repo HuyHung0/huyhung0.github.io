@@ -243,3 +243,6 @@ html.nav-open .nav-scrim{
     border: 1px solid rgba(255,255,255,.12);
   }
 }
+@media (prefers-reduced-motion: no-preference){
+  html { scroll-behavior: smooth; }
+}

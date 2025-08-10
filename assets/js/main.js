@@ -82,3 +82,20 @@ if (document.fonts && document.fonts.ready) { document.fonts.ready.then(() => { 
 // Footer year
 const yearEl = document.getElementById('year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
+// Back-to-top: robust on iOS/Android (fixed-header friendly)
+const backToTop = document.getElementById('backToTop');
+backToTop?.addEventListener('click', (e) => {
+  e.preventDefault();
+  // Close mobile menu if open so we can scroll
+  document.documentElement.classList.remove('nav-open');
+  document.querySelector('header')?.setAttribute('data-open', 'false');
+  document.querySelector('.hamburger')?.setAttribute('aria-expanded', 'false');
+
+  // Smooth scroll to top (works even if #top is a fixed element)
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Optional: keep URL clean (remove #top if added by fallback)
+  if (location.hash === '#top') {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+});
