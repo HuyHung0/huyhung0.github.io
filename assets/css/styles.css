@@ -17,7 +17,6 @@
   }
 }
 
-/* Mobile-friendly nav height */
 @media (max-width: 480px){
   :root{ --nav-h: 64px; }
 }
@@ -34,7 +33,7 @@ body{
   -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
   position:relative; overflow-x:hidden; padding-top:calc(var(--nav-h) + env(safe-area-inset-top, 0px));
 }
-html.nav-open{ overflow-y: hidden; } /* prevent background scroll when mobile menu open */
+html.nav-open{ overflow-y: hidden; }
 
 img{max-width:100%; height:auto; display:block}
 
@@ -54,6 +53,8 @@ body::before{
   50%{transform:translate3d(-1%,-1%,0) scale(1.01); background-position:50% 40%,80% 20%,60% 40%}
   100%{transform:translate3d(0,0,0) scale(1); background-position:0% 10%,90% 10%,50% 60%}
 }
+/* Pause animation when menu open */
+html.nav-open body::before{ animation:none; }
 
 a{color:var(--accent-2); text-decoration:none; transition:color var(--dur-1) var(--easing)}
 main a:hover:not(.button){ text-decoration: underline; }
@@ -63,13 +64,14 @@ main a:hover:not(.button){ text-decoration: underline; }
 .skip{
   position:fixed; left:12px; top:12px; background:var(--accent); color:#fff;
   padding:8px 12px; border-radius:8px; transform:translateY(-150%); opacity:0; pointer-events:none;
-  transition:transform var(--dur-2) var(--easing), opacity var(--dur-2) var(--easing); z-index:9999;
+  transition:transform var(--dur-2) var(--easing), opacity var(--dur-2) var(--easing); z-index:3000;
 }
 .skip:focus-visible{ transform:none; opacity:1; pointer-events:auto; text-decoration:none }
 
-/* Header (fixed glass) */
+/* Header */
+/* CHANGED: raise z-index above scrim so menu is clickable */
 header{
-  position:fixed; top:0; left:0; right:0; z-index:100; height:var(--nav-h);
+  position:fixed; top:0; left:0; right:0; z-index:1200; height:var(--nav-h);
   display:flex; align-items:center;
   background:var(--glass-strong); backdrop-filter:var(--backdrop);
   border-bottom:1px solid var(--border);
@@ -96,54 +98,53 @@ header{
   .menu{
     display:none; position:fixed; right:clamp(16px,4vw,24px); top:calc(var(--nav-h) + env(safe-area-inset-top, 0px) - 6px);
     width:min(92vw, 420px);
-    flex-direction:column; align-items:flex-start; gap:8px;
-    background:var(--glass-strong); backdrop-filter:var(--backdrop);
-    padding:16px; border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow)
+    flex-direction:column; align-items:flex-start; gap:4px;
+    background:#0e1016; /* solid */
+    padding:18px 18px 20px; border:1px solid rgba(255,255,255,.14); border-radius:14px; box-shadow:var(--shadow)
   }
   header[data-open="true"] .menu{display:flex; animation:fade-up var(--dur-3) var(--easing) both}
   .hamburger{display:inline-grid; place-items:center}
-}
-
-/* Improved mobile menu contrast / blur */
-@media (max-width:860px){
-  header[data-open="true"] .menu{ display:flex; }
-  .menu{
-    z-index:1001;
-    /* Refined backdrop: reduce excessive blur & increase opacity for contrast */
-    background:rgba(14,16,22,.95);
-    -webkit-backdrop-filter:blur(6px) saturate(140%);
-    backdrop-filter:blur(6px) saturate(140%);
-    border:1px solid rgba(255,255,255,.12);
+  /* BRIGHTER, LARGER LINKS */
+  .menu a{
+    color:#fff;
+    font-size:1.06rem;
+    line-height:1.35;
+    letter-spacing:.2px;
+    text-shadow:0 0 1px rgba(255,255,255,.25); /* subtle crispness; remove if undesired */
+    padding:10px 2px;
   }
-  /* Stronger link contrast inside menu */
-  .menu a{ color:var(--text); }
-}
-
-/* Fallback when backdrop-filter NOT supported */
-@supports not ((backdrop-filter:blur(4px)) or (-webkit-backdrop-filter:blur(4px))){
-  @media (max-width:860px){
-    .menu{
-      background:#0e1016 !important;
-      -webkit-backdrop-filter:none !important;
-      backdrop-filter:none !important;
-    }
+  .menu a:focus-visible{
+    outline:2px solid var(--accent);
+    border-radius:6px;
+    outline-offset:2px;
+  }
+  .menu a:active{
+    transform:translateY(1px);
   }
 }
 
-/* Optional: class-based fallback (if JS adds html.no-backdrop) */
-html.no-backdrop @media (max-width:860px){
-  .menu{
-    background:#0e1016;
-    -webkit-backdrop-filter:none;
-    backdrop-filter:none;
-  }
+/* Scrim */
+/* CHANGED: lower z-index below header so it no longer blocks menu */
+.nav-scrim{
+  position: fixed;
+  inset: 0;
+  background: rgba(6,10,20,.55);
+  -webkit-backdrop-filter:none;
+  backdrop-filter:none;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity var(--dur-2) var(--easing);
+  z-index:1100; /* below header (1200) now */
+}
+html.nav-open .nav-scrim{
+  opacity:1;
+  pointer-events:auto;
 }
 
 /* Sections */
 .section{padding:60px 0}
 .section + .section{padding-top:48px}
 .section.alt{background: linear-gradient(to bottom, transparent, rgba(255,255,255,.02) 8%, transparent 100%)}
-/* Phone spacing */
 @media (max-width:480px){
   .section{padding:44px 0}
 }
@@ -166,7 +167,7 @@ html.no-backdrop @media (max-width:860px){
   .hero{grid-template-columns:1fr}
 }
 
-/* Glass cards (global) */
+/* Glass cards */
 .card,.avatar-card,.timeline-item{
   background:var(--glass); border:1px solid var(--border); border-radius:var(--radius);
   box-shadow:var(--shadow); backdrop-filter:var(--backdrop);
@@ -207,7 +208,6 @@ html.no-backdrop @media (max-width:860px){
 .meta{color:var(--muted); font-size:.95rem}
 .bullets{margin:10px 0 0; padding-left:20px}
 
-/* Ensure grid columns adapt */
 #projects .grid{ grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; }
 #certifications .grid{ grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important; }
 #publications .grid{ grid-template-columns: 1fr !important; }
@@ -217,7 +217,7 @@ html.no-backdrop @media (max-width:860px){
   #certifications .grid{ grid-template-columns: 1fr !important; }
 }
 
-/* Timeline (Education) */
+/* Timeline */
 .timeline{display:grid; gap:14px}
 .timeline-item{
   display:grid; grid-template-columns:150px 1fr; gap:18px; align-items:start; padding:16px;
@@ -246,23 +246,6 @@ footer{border-top:1px solid var(--border)}
 .foot{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:24px 0 40px; color:var(--muted); font-size:.98rem}
 @media (max-width:520px){
   .foot{ flex-direction:column; align-items:flex-start; gap:8px; }
-}
-
-/* Full-screen scrim behind the mobile menu */
-.nav-scrim{
-  position: fixed;
-  inset: 0;
-  background: rgba(6, 10, 20, .55);
-  -webkit-backdrop-filter: blur(3px);
-  backdrop-filter: blur(3px);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--dur-2) var(--easing);
-  z-index: 1000; /* below the menu, above page content */
-}
-html.nav-open .nav-scrim{
-  opacity: 1;
-  pointer-events: auto;
 }
 
 @media (prefers-reduced-motion: no-preference){
