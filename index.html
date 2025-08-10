@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Huy Hung Le — Cybersecurity & Red Teaming</title>
-  <meta name="description"
-    content="Personal website of Huy Hung Le — cybersecurity practitioner focused on penetration testing and red teaming; MSc in Digital Security (EURECOM, 2024) and PhD in Mathematics (2021)." />
+  <meta name="description" content="Personal website of Huy Hung Le — cybersecurity practitioner focused on penetration testing and red teaming; MSc in Digital Security (EURECOM, 2024) and PhD in Mathematics (2021)." />
   <meta name="author" content="Huy Hung Le" />
   <link rel="canonical" href="https://huyhung0.github.io/" />
   <meta name="theme-color" content="#0b57d0" />
@@ -15,8 +13,7 @@
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Huy Hung Le" />
-  <meta property="og:description"
-    content="Cybersecurity practitioner focused on penetration testing and red teaming." />
+  <meta property="og:description" content="Cybersecurity practitioner focused on penetration testing and red teaming." />
   <meta property="og:site_name" content="Huy Hung Le" />
   <meta property="og:url" content="https://huyhung0.github.io/" />
   <meta property="og:image" content="/images/lehung.jpg" />
@@ -46,7 +43,7 @@
   </script>
 
   <style>
-    :root {
+    :root{
       /* Colors */
       --bg: #0b0c10;
       --surface: #0e1016;
@@ -54,523 +51,207 @@
       --muted: #aab0c0;
       --accent: #2f6df6;
       --accent-2: #60a5fa;
-      --border: rgba(255, 255, 255, .14);
+      --border: rgba(255,255,255,.14);
       /* Effects */
-      --shadow: 0 12px 40px rgba(0, 0, 0, .35);
+      --shadow: 0 12px 40px rgba(0,0,0,.35);
       --radius: 18px;
-      --glass: rgba(255, 255, 255, .06);
-      --glass-strong: rgba(255, 255, 255, .10);
+      --glass: rgba(255,255,255,.06);
+      --glass-strong: rgba(255,255,255,.10);
       --backdrop: saturate(130%) blur(12px);
       /* Layout */
       --maxw: 1100px;
       --nav-h: 72px;
       /* Motion */
-      --easing: cubic-bezier(.22, .61, .36, 1);
-      --dur-1: 120ms;
-      --dur-2: 220ms;
-      --dur-3: 520ms;
+      --easing: cubic-bezier(.22,.61,.36,1);
+      --dur-1: 120ms; --dur-2: 220ms; --dur-3: 520ms;
       --lift: translateY(-4px);
     }
-
-    @media (prefers-color-scheme: light) {
-      :root {
+    @media (prefers-color-scheme: light){
+      :root{
         --bg: #f7fafc;
-        --surface: #eef2f6;
-        --text: #0f172a;
-        --muted: #475569;
-        --border: rgba(15, 23, 42, .12);
-        --glass: rgba(255, 255, 255, .65);
-        --glass-strong: rgba(255, 255, 255, .75);
-        --shadow: 0 12px 40px rgba(2, 6, 23, .08);
+        --surface:#eef2f6;
+        --text:#0f172a;
+        --muted:#475569;
+        --border: rgba(15,23,42,.12);
+        --glass: rgba(255,255,255,.65);
+        --glass-strong: rgba(255,255,255,.75);
+        --shadow: 0 12px 40px rgba(2,6,23,.08);
       }
     }
 
-    * {
-      box-sizing: border-box
-    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-padding-top:var(--nav-h)}
+    @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 
-    html,
-    body {
-      height: 100%
-    }
-
-    html {
-      scroll-padding-top: var(--nav-h)
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important
-      }
-    }
-
-    body {
-      margin: 0;
-      color: var(--text);
-      font: 17px/1.65 "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    body{
+      margin:0;
+      color:var(--text);
+      font: 17px/1.65 "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
       background: var(--surface);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      position: relative;
-      overflow-x: hidden;
+      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
+      position:relative; overflow-x:hidden;
       /* Keep content visible under fixed header */
       padding-top: var(--nav-h);
     }
 
     /* Animated gradient backdrop */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: -20% -20%;
-      z-index: -1;
-      pointer-events: none;
+    body::before{
+      content:"";
+      position:fixed; inset:-20% -20%;
+      z-index:-1; pointer-events:none;
       background:
-        radial-gradient(1200px 800px at 10% -10%, rgba(47, 109, 246, .20), transparent 55%),
-        radial-gradient(1000px 600px at 100% 10%, rgba(96, 165, 250, .15), transparent 45%),
-        conic-gradient(from 0deg at 50% 50%, rgba(47, 109, 246, .10), rgba(96, 165, 250, .12), rgba(47, 109, 246, .08), rgba(96, 165, 250, .10));
+        radial-gradient(1200px 800px at 10% -10%, rgba(47,109,246,.20), transparent 55%),
+        radial-gradient(1000px 600px at 100% 10%, rgba(96,165,250,.15), transparent 45%),
+        conic-gradient(from 0deg at 50% 50%, rgba(47,109,246,.10), rgba(96,165,250,.12), rgba(47,109,246,.08), rgba(96,165,250,.10));
       background-size: 140% 140%, 120% 120%, 200% 200%;
       filter: saturate(120%);
       animation: bgShift 28s ease-in-out infinite alternate;
     }
-
-    @keyframes bgShift {
-      0% {
-        transform: translate3d(0, 0, 0) scale(1);
-        background-position: 0% 0%, 100% 0%, 50% 50%;
-      }
-
-      50% {
-        transform: translate3d(-1%, -1%, 0) scale(1.01);
-        background-position: 50% 40%, 80% 20%, 60% 40%;
-      }
-
-      100% {
-        transform: translate3d(0, 0, 0) scale(1);
-        background-position: 0% 10%, 90% 10%, 50% 60%;
-      }
+    @keyframes bgShift{
+      0%   { transform: translate3d(0,0,0) scale(1); background-position: 0% 0%, 100% 0%, 50% 50%; }
+      50%  { transform: translate3d(-1%, -1%, 0) scale(1.01); background-position: 50% 40%, 80% 20%, 60% 40%; }
+      100% { transform: translate3d(0,0,0) scale(1); background-position: 0% 10%, 90% 10%, 50% 60%; }
     }
 
-    a {
-      color: var(--accent-2);
-      text-decoration: none;
-      transition: color var(--dur-1) var(--easing)
-    }
-
+    a{color:var(--accent-2); text-decoration:none; transition:color var(--dur-1) var(--easing)}
     main a:hover:not(.button) {
-      text-decoration: underline;
-    }
-
-    .container {
-      max-width: var(--maxw);
-      margin-inline: auto;
-      padding-inline: 20px
-    }
+  text-decoration: underline;
+}
+    .container{max-width:var(--maxw); margin-inline:auto; padding-inline:20px}
 
     /* Skip link – only visible on keyboard focus */
-    .skip {
-      position: fixed;
-      left: 12px;
-      top: 12px;
-      background: var(--accent);
-      color: #fff;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transform: translateY(-150%);
-      opacity: 0;
-      pointer-events: none;
+    .skip{
+      position: fixed; left:12px; top:12px;
+      background: var(--accent); color:#fff;
+      padding: 8px 12px; border-radius: 8px;
+      transform: translateY(-150%); opacity:0; pointer-events:none;
       transition: transform var(--dur-2) var(--easing), opacity var(--dur-2) var(--easing);
       z-index: 9999;
     }
-
-    .skip:focus-visible {
-      transform: none;
-      opacity: 1;
-      pointer-events: auto;
-      text-decoration: none;
+    .skip:focus-visible{
+      transform: none; opacity:1; pointer-events:auto;
+      text-decoration:none;
     }
 
     /* Header – fixed (always visible) + glass */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      height: var(--nav-h);
-      display: flex;
-      align-items: center;
+    header{
+      position: fixed; top:0; left:0; right:0; z-index: 100;
+      height:var(--nav-h);
+      display:flex; align-items:center;
       background: var(--glass-strong);
       backdrop-filter: var(--backdrop);
       border-bottom: 1px solid var(--border);
       transition: background var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing);
     }
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.2px}
+    .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);
+      box-shadow:0 0 0 4px rgba(47,109,246,.18); animation:pulse 2.8s var(--easing) infinite}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px
+    .menu{display:flex; align-items:center; gap:22px}
+    .menu a{color:var(--muted); font-weight:600; position:relative; padding-bottom:2px}
+    .menu a::after{
+      content:""; position:absolute; left:0; right:0; bottom:-6px; height:2px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      transform:scaleX(0); transform-origin:left; transition:transform var(--dur-2) var(--easing)
     }
+    .menu a:hover::after, .menu a[aria-current="page"]::after{transform:scaleX(1)}
+    .menu a[aria-current="page"]{color:var(--text)}
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      letter-spacing: .2px
-    }
-
-    .brand .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 0 4px rgba(47, 109, 246, .18);
-      animation: pulse 2.8s var(--easing) infinite
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        transform: scale(1)
-      }
-
-      50% {
-        transform: scale(1.06)
-      }
-    }
-
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 22px
-    }
-
-    .menu a {
-      color: var(--muted);
-      font-weight: 600;
-      position: relative;
-      padding-bottom: 2px
-    }
-
-    .menu a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -6px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform var(--dur-2) var(--easing)
-    }
-
-    .menu a:hover::after,
-    .menu a[aria-current="page"]::after {
-      transform: scaleX(1)
-    }
-
-    .menu a[aria-current="page"] {
-      color: var(--text)
-    }
-
-    .hamburger {
-      display: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--glass);
-      backdrop-filter: var(--backdrop)
-    }
-
-    @media (max-width:860px) {
-      .menu {
-        display: none;
-        position: absolute;
-        right: 20px;
-        top: calc(var(--nav-h) - 6px);
-        flex-direction: column;
-        align-items: flex-start;
-        background: var(--glass-strong);
-        backdrop-filter: var(--backdrop);
-        padding: 16px;
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        box-shadow: var(--shadow)
-      }
-
-      header[data-open="true"] .menu {
-        display: flex;
-        animation: fade-up var(--dur-3) var(--easing) both
-      }
-
-      .hamburger {
-        display: inline-grid;
-        place-items: center
-      }
+    .hamburger{display:none; width:40px;height:40px;border-radius:10px;border:1px solid var(--border); background:var(--glass); backdrop-filter:var(--backdrop)}
+    @media (max-width:860px){
+      .menu{display:none; position:absolute; right:20px; top:calc(var(--nav-h) - 6px); flex-direction:column; align-items:flex-start;
+        background:var(--glass-strong); backdrop-filter:var(--backdrop); padding:16px; border:1px solid var(--border);
+        border-radius:14px; box-shadow:var(--shadow)}
+      header[data-open="true"] .menu{display:flex; animation:fade-up var(--dur-3) var(--easing) both}
+      .hamburger{display:inline-grid; place-items:center}
     }
 
     /* Sections */
-    .section {
-      padding: 60px 0
-    }
-
-    .section+.section {
-      padding-top: 48px
-    }
-
-    .section.alt {
-      background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .02) 8%, transparent 100%)
-    }
+    .section{padding:60px 0}
+    .section + .section{padding-top:48px}
+    .section.alt{background: linear-gradient( to bottom, transparent, rgba(255,255,255,.02) 8%, transparent 100%)}
 
     /* Hero */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: center
+    .hero{display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center}
+    .hero h1{font-size: clamp(2rem, 2.4rem + 1.1vw, 3.6rem); line-height:1.1; margin:0 0 12px}
+    .tagline{color:var(--muted); font-size:1.08rem; margin-bottom:22px}
+    .cta{display:flex; gap:12px; flex-wrap:wrap}
+    .button{
+      display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius:14px;
+      border:1px solid var(--border); background:var(--glass); color:var(--text); font-weight:600;
+      box-shadow:var(--shadow); backdrop-filter:var(--backdrop);
+      transition:transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing)
     }
-
-    .hero h1 {
-      font-size: clamp(2rem, 2.4rem + 1.1vw, 3.6rem);
-      line-height: 1.1;
-      margin: 0 0 12px
-    }
-
-    .tagline {
-      color: var(--muted);
-      font-size: 1.08rem;
-      margin-bottom: 22px
-    }
-
-    .cta {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: var(--glass);
-      color: var(--text);
-      font-weight: 600;
-      box-shadow: var(--shadow);
-      backdrop-filter: var(--backdrop);
-      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing)
-    }
-
-    .button:hover {
-      transform: var(--lift);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, .35)
-    }
-
-    .button.primary {
-      background: linear-gradient(180deg, color-mix(in oklab, var(--accent), white 10%), var(--accent));
-      border: none;
-      color: #fff
-    }
+    .button:hover{transform:var(--lift); box-shadow:0 18px 38px rgba(0,0,0,.35)}
+    .button.primary{background:linear-gradient(180deg, color-mix(in oklab,var(--accent),white 10%), var(--accent)); border:none; color:#fff}
 
     /* Glass cards (global) */
-    .card,
-    .avatar-card,
-    .timeline-item {
-      background: var(--glass);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      backdrop-filter: var(--backdrop);
+    .card, .avatar-card, .timeline-item{
+      background:var(--glass);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      backdrop-filter:var(--backdrop);
     }
 
     /* Avatar card (interactive) */
-    .avatar-card {
-      padding: 26px;
-      display: grid;
-      grid-template-columns: 170px 1fr;
-      gap: 22px;
-      align-items: center;
+    .avatar-card{
+      padding:26px; display:grid; grid-template-columns:170px 1fr; gap:22px; align-items:center;
       transition: transform var(--dur-3) var(--easing), box-shadow var(--dur-3) var(--easing), border-color var(--dur-2) var(--easing)
     }
-
-    .avatar-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 48px rgba(0, 0, 0, .38)
-    }
-
-    .avatar-card img {
-      width: 170px;
-      height: 170px;
-      border-radius: 22px;
-      object-fit: cover;
-      border: 1px solid var(--border)
-    }
-
-    .avatar-card .links {
-      font-size: 1rem
-    }
-
-    .inline-icons a {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text);
-      transition: transform var(--dur-2) var(--easing), color var(--dur-2) var(--easing)
-    }
-
-    .inline-icons a:hover {
-      color: var(--accent-2);
-      transform: translateX(2px)
-    }
-
-    .inline-icons svg {
-      width: 22px;
-      height: 22px;
-      opacity: .95;
-      flex: 0 0 22px
-    }
+    .avatar-card:hover{transform:translateY(-6px); box-shadow:0 24px 48px rgba(0,0,0,.38)}
+    .avatar-card img{width:170px;height:170px;border-radius:22px;object-fit:cover;border:1px solid var(--border)}
+    .avatar-card .links{font-size:1rem}
+    .inline-icons a{display:inline-flex; align-items:center; gap:10px; color:var(--text); transition:transform var(--dur-2) var(--easing), color var(--dur-2) var(--easing)}
+    .inline-icons a:hover{color:var(--accent-2); transform:translateX(2px)}
+    .inline-icons svg{width:22px;height:22px;opacity:.95;flex:0 0 22px}
 
     /* Grids / cards */
-    .grid {
-      display: grid;
-      gap: 18px
-    }
-
-    .card {
-      padding: 20px;
-      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing)
-    }
-
-    .card:hover {
-      transform: var(--lift);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, .35);
-      border-color: color-mix(in oklab, var(--accent), #000 70%)
-    }
-
-    .section-title {
-      font-size: 1.45rem;
-      margin: 0 0 18px;
-      letter-spacing: .2px
-    }
-
-    .meta {
-      color: var(--muted);
-      font-size: .95rem
-    }
-
-    .bullets {
-      margin: 10px 0 0;
-      padding-left: 20px
-    }
+    .grid{display:grid; gap:18px}
+    .card{padding:20px; transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing)}
+    .card:hover{transform:var(--lift); box-shadow:0 18px 38px rgba(0,0,0,.35); border-color: color-mix(in oklab,var(--accent),#000 70%)}
+    .section-title{font-size:1.45rem; margin:0 0 18px; letter-spacing:.2px}
+    .meta{color:var(--muted); font-size:.95rem}
+    .bullets{margin:10px 0 0; padding-left:20px}
 
     /* Timeline (Education) – row interactivity */
-    .timeline {
-      display: grid;
-      gap: 14px
-    }
-
-    .timeline-item {
-      display: grid;
-      grid-template-columns: 150px 1fr;
-      gap: 18px;
-      align-items: start;
-      padding: 16px;
+    .timeline{display:grid; gap:14px}
+    .timeline-item{
+      display:grid; grid-template-columns:150px 1fr; gap:18px; align-items:start; padding:16px;
       transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing), background var(--dur-2) var(--easing);
       cursor: default;
     }
-
-    .timeline-item:hover,
-    .timeline-item:focus-within {
-      transform: var(--lift);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, .35);
-      border-color: color-mix(in oklab, var(--accent), #000 70%);
+    .timeline-item:hover, .timeline-item:focus-within{
+      transform:var(--lift);
+      box-shadow:0 18px 38px rgba(0,0,0,.35);
+      border-color: color-mix(in oklab,var(--accent),#000 70%);
       background: linear-gradient(180deg, var(--glass-strong), var(--glass));
     }
-
-    .timeline-item:focus-visible {
-      outline: 2px solid var(--accent)
-    }
-
-    .timeline-item .year {
-      font-weight: 700;
-      color: var(--muted)
-    }
-
-    .timeline-item .place a {
-      font-weight: 600
-    }
+    .timeline-item:focus-visible{outline: 2px solid var(--accent)}
+    .timeline-item .year{font-weight:700; color:var(--muted)}
+    .timeline-item .place a{font-weight:600}
 
     /* Reveal on scroll */
-    .reveal {
-      opacity: 0;
-      transform: translateY(14px) scale(.98)
-    }
-
-    .reveal.in-view {
-      animation: fade-up var(--dur-3) var(--easing) forwards
-    }
-
-    @keyframes fade-up {
-      from {
-        opacity: 0;
-        transform: translateY(14px) scale(.98)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1)
-      }
-    }
+    .reveal{opacity:0; transform: translateY(14px) scale(.98)}
+    .reveal.in-view{animation: fade-up var(--dur-3) var(--easing) forwards}
+    @keyframes fade-up{from{opacity:0; transform:translateY(14px) scale(.98)} to{opacity:1; transform:translateY(0) scale(1)}}
 
     /* Footer */
-    footer {
-      border-top: 1px solid var(--border)
+    footer{border-top:1px solid var(--border)}
+    .foot{display:flex; align-items:center; justify-content:space-between; padding:24px 0 40px; color:var(--muted); font-size:.98rem}
+
+    @media (max-width:920px){
+      .avatar-card{grid-template-columns:150px 1fr}
+      .avatar-card img{width:150px;height:150px}
     }
-
-    .foot {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 0 40px;
-      color: var(--muted);
-      font-size: .98rem
-    }
-
-    @media (max-width:920px) {
-      .avatar-card {
-        grid-template-columns: 150px 1fr
-      }
-
-      .avatar-card img {
-        width: 150px;
-        height: 150px
-      }
-    }
-
-    @media (max-width:720px) {
-      .hero {
-        grid-template-columns: 1fr
-      }
-
-      .avatar-card {
-        grid-template-columns: 120px 1fr
-      }
-
-      .avatar-card img {
-        width: 120px;
-        height: 120px
-      }
-
-      body {
-        font-size: 16px
-      }
+    @media (max-width:720px){
+      .hero{grid-template-columns:1fr}
+      .avatar-card{grid-template-columns:120px 1fr}
+      .avatar-card img{width:120px;height:120px}
+      body{font-size:16px}
     }
   </style>
 </head>
@@ -601,13 +282,10 @@
       <div class="container hero">
         <div>
           <h1>Cybersecurity & Red Teaming</h1>
-          <p class="tagline">I'm Hung — a cybersecurity practitioner focused on penetration testing, red teaming, and
-            software/firmware analysis. I hold an <strong>MSc in Digital Security</strong> (EURECOM, 2024) and a
-            <strong>PhD in Mathematics</strong> (2021).</p>
+          <p class="tagline">I'm Hung — a cybersecurity practitioner focused on penetration testing, red teaming, and software/firmware analysis. I hold an <strong>MSc in Digital Security</strong> (EURECOM, 2024) and a <strong>PhD in Mathematics</strong> (2021).</p>
           <div class="cta">
             <a class="button" href="https://github.com/huyhung0" target="_blank" rel="noopener">GitHub</a>
-            <a class="button" href="https://www.linkedin.com/in/huy-hung-le-9685b2161/" target="_blank"
-              rel="noopener">LinkedIn</a>
+            <a class="button" href="https://www.linkedin.com/in/huy-hung-le-9685b2161/" target="_blank" rel="noopener">LinkedIn</a>
             <a class="button" href="/notes">Notes</a>
           </div>
         </div>
@@ -617,39 +295,27 @@
             <div class="links">
               <div class="inline-icons">
                 <a href="mailto:lehuyhung94@gmail.com" rel="me" aria-label="Email: lehuyhung94@gmail.com">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                    <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
-                    <path d="m22 6-10 7L2 6" />
-                  </svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="m22 6-10 7L2 6"/></svg>
                   lehuyhung94@gmail.com
                 </a>
               </div>
               <div class="inline-icons">
                 <a href="mailto:huy-hung.le@eurecom.fr" aria-label="Email: huy-hung.le@eurecom.fr">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                    <path d="M4 4h16a2 2 0 0 1 2 2v12a 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a 2 2 0 0 1 2-2Z" />
-                    <path d="m22 6-10 7L2 6" />
-                  </svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a 2 2 0 0 1 2-2Z"/><path d="m22 6-10 7L2 6"/></svg>
                   huy-hung.le@eurecom.fr
                 </a>
               </div>
               <div class="inline-icons">
                 <a href="https://github.com/huyhung0" target="_blank" rel="noopener" aria-label="GitHub: huyhung0">
-                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path
-                      d="M12 .5A11.5 11.5 0 0 0 .5 12.7c0 5.4 3.5 10 8.4 11.6.6.1.8-.2.8-.5v-2c-3.4.7-4.1-1.6-4.1-1.6-.5-1.2-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.7 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.4-5.5-6.1 0-1.3.5-2.4 1.2-3.3 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.1 0c2.4-1.5 3.4-1.2 3.4-1.2.7 1.7.2 2.9.2 3.2.8.9 1.2 2 1.2 3.3 0 4.7-2.8 5.8-5.5 6.1.4.3.8 1 .8 2v3c0 .3.2.6.8.5 4.9-1.6 8.4-6.2 8.4-11.6A11.5 11.5 0 0 0 12 .5Z" />
-                  </svg>
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12.7c0 5.4 3.5 10 8.4 11.6.6.1.8-.2.8-.5v-2c-3.4.7-4.1-1.6-4.1-1.6-.5-1.2-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.7 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.4-5.5-6.1 0-1.3.5-2.4 1.2-3.3 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.1 0c2.4-1.5 3.4-1.2 3.4-1.2.7 1.7.2 2.9.2 3.2.8.9 1.2 2 1.2 3.3 0 4.7-2.8 5.8-5.5 6.1.4.3.8 1 .8 2v3c0 .3.2.6.8.5 4.9-1.6 8.4-6.2 8.4-11.6A11.5 11.5 0 0 0 12 .5Z"/></svg>
                   github.com/huyhung0
                 </a>
               </div>
               <div class="inline-icons">
-                <a href="https://www.linkedin.com/in/huy-hung-le-9685b2161/" target="_blank" rel="noopener"
-                  aria-label="LinkedIn profile">
+                <a href="https://www.linkedin.com/in/huy-hung-le-9685b2161/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="#0A66C2"
-                      d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
-                    <path fill="#FFFFFF"
-                      d="M5.337 7.433a1.77 1.77 0 1 1 0-3.54 1.77 1.77 0 0 1 0 3.54zM3.76 9h3.151v11.452H3.76V9zm7.395 0h3.025v1.561h.043c.422-.8 1.453-1.642 2.992-1.642 3.2 0 3.787 2.106 3.787 4.852v6.681h-3.046v-5.891c0-1.404-.028-3.211-2.008-3.211-2.01 0-2.317 1.571-2.317 3.101v6.001H11.155V9z" />
+                    <path fill="#0A66C2" d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
+                    <path fill="#FFFFFF" d="M5.337 7.433a1.77 1.77 0 1 1 0-3.54 1.77 1.77 0 0 1 0 3.54zM3.76 9h3.151v11.452H3.76V9zm7.395 0h3.025v1.561h.043c.422-.8 1.453-1.642 2.992-1.642 3.2 0 3.787 2.106 3.787 4.852v6.681h-3.046v-5.891c0-1.404-.028-3.211-2.008-3.211-2.01 0-2.317 1.571-2.317 3.101v6.001H11.155V9z"/>
                   </svg>
                   LinkedIn
                 </a>
@@ -665,48 +331,37 @@
       <div class="container">
         <h2 class="section-title">Education</h2>
         <div class="timeline">
-          <div class="timeline-item reveal" tabindex="0" role="group"
-            aria-label="MSc in Digital Security at EURECOM, 2022–2024">
+          <div class="timeline-item reveal" tabindex="0" role="group" aria-label="MSc in Digital Security at EURECOM, 2022–2024">
             <div class="year">2022–2024</div>
             <div class="place">
-              <strong>MSc in Digital Security</strong> — <a href="https://www.eurecom.fr/en" target="_blank"
-                rel="noopener">EURECOM</a>, Biot, France
+              <strong>MSc in Digital Security</strong> — <a href="https://www.eurecom.fr/en" target="_blank" rel="noopener">EURECOM</a>, Biot, France
             </div>
           </div>
-          <div class="timeline-item reveal" tabindex="0" role="group"
-            aria-label="PhD in Mathematics, Université de Caen Normandie, 2018–2021">
+          <div class="timeline-item reveal" tabindex="0" role="group" aria-label="PhD in Mathematics, Université de Caen Normandie, 2018–2021">
             <div class="year">2018–2021</div>
             <div class="place">
-              <strong>PhD in Mathematics</strong> — <a href="https://www.unicaen.fr/" target="_blank"
-                rel="noopener">Université de Caen Normandie</a>, Caen, France
+              <strong>PhD in Mathematics</strong> — <a href="https://www.unicaen.fr/" target="_blank" rel="noopener">Université de Caen Normandie</a>, Caen, France
             </div>
           </div>
-          <div class="timeline-item reveal" tabindex="0" role="group"
-            aria-label="M2 in Mathematics, Institut Fourier, 2017–2018">
+          <div class="timeline-item reveal" tabindex="0" role="group" aria-label="M2 in Mathematics, Institut Fourier, 2017–2018">
             <div class="year">2017–2018</div>
             <div class="place">
-              <strong>M2 in Mathematics</strong> — <a href="https://www-fourier.ujf-grenoble.fr/" target="_blank"
-                rel="noopener">Institut Fourier</a>, Grenoble, France
+              <strong>M2 in Mathematics</strong> — <a href="https://www-fourier.ujf-grenoble.fr/" target="_blank" rel="noopener">Institut Fourier</a>, Grenoble, France
             </div>
           </div>
-          <div class="timeline-item reveal" tabindex="0" role="group"
-            aria-label="M1 in Mathematics, Institute of Mathematics, 2016–2017">
+          <div class="timeline-item reveal" tabindex="0" role="group" aria-label="M1 in Mathematics, Institute of Mathematics, 2016–2017">
             <div class="year">2016–2017</div>
             <div class="place">
-              <strong>M1 in Mathematics</strong> — <a href="http://math.ac.vn/en/trang-chu/gioi-thieu-vien-toan.html"
-                target="_blank" rel="noopener">Institute of Mathematics</a>, Hanoi, Vietnam
+              <strong>M1 in Mathematics</strong> — <a href="http://math.ac.vn/en/trang-chu/gioi-thieu-vien-toan.html" target="_blank" rel="noopener">Institute of Mathematics</a>, Hanoi, Vietnam
             </div>
           </div>
-          <div class="timeline-item reveal" tabindex="0" role="group"
-            aria-label="BSc in Mathematics, University of Science, 2012–2016">
+          <div class="timeline-item reveal" tabindex="0" role="group" aria-label="BSc in Mathematics, University of Science, 2012–2016">
             <div class="year">2012–2016</div>
             <div class="place">
-              <strong>BSc in Mathematics</strong> — <a href="https://hus.vnu.edu.vn/" target="_blank"
-                rel="noopener">University of Science</a>, Hanoi, Vietnam
+              <strong>BSc in Mathematics</strong> — <a href="https://hus.vnu.edu.vn/" target="_blank" rel="noopener">University of Science</a>, Hanoi, Vietnam
             </div>
           </div>
-          <div class="timeline-item reveal" tabindex="0" role="group"
-            aria-label="Tran Phu Gifted High School, 2009–2012">
+          <div class="timeline-item reveal" tabindex="0" role="group" aria-label="Tran Phu Gifted High School, 2009–2012">
             <div class="year">2009–2012</div>
             <div class="place">
               <strong>High School</strong> — Tran Phu Gifted High School, Haiphong, Vietnam
@@ -723,23 +378,17 @@
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
           <article class="card reveal" tabindex="0">
             <h3>pestudio-cli — PE Static Analysis</h3>
-            <p class="meta">June–July 2023 · <a href="https://github.com/HuyHung0/pestudio-cli" target="_blank"
-                rel="noopener">GitHub</a></p>
+            <p class="meta">June–July 2023 · <a href="https://github.com/HuyHung0/pestudio-cli" target="_blank" rel="noopener">GitHub</a></p>
             <ul class="bullets">
               <li>Revived a Python CLI to scan Portable Executable (PE) files for known malicious patterns.</li>
               <li>Fixed breaking changes in dependencies and refreshed threat signature databases.</li>
-              <li>Added <em>hole detection</em> to flag data outside section boundaries; improved output and
-                documentation.</li>
+              <li>Added <em>hole detection</em> to flag data outside section boundaries; improved output and documentation.</li>
             </ul>
           </article>
 
           <article class="card reveal" tabindex="0">
             <h3>BLE OTA Firmware Update Security</h3>
-            <p class="meta">Mar–Jun 2023 · <a
-                href="https://github.com/HuyHung0/Spring2023---Security-Analysis-Of-Bluetooth-Low-Energy-Over-The-Air-Firmware-Updates"
-                target="_blank" rel="noopener">GitHub</a> · <a
-                href="https://gitlab.eurecom.fr/lehh/spring2023-Security-analysis-of-Bluetooth-low-energy-Over-the-Air-firmware-updates"
-                target="_blank" rel="noopener">GitLab</a></p>
+            <p class="meta">Mar–Jun 2023 · <a href="https://github.com/HuyHung0/Spring2023---Security-Analysis-Of-Bluetooth-Low-Energy-Over-The-Air-Firmware-Updates" target="_blank" rel="noopener">GitHub</a> · <a href="https://gitlab.eurecom.fr/lehh/spring2023-Security-analysis-of-Bluetooth-low-energy-Over-the-Air-firmware-updates" target="_blank" rel="noopener">GitLab</a></p>
             <ul class="bullets">
               <li>Reverse-engineered Nordic nRF51/nRF52 BLE DFU protocol and update workflow.</li>
               <li>Assessed integrity/authentication of OTA updates; developed proof-of-concept analysis tooling.</li>
@@ -748,10 +397,7 @@
 
           <article class="card reveal" tabindex="0">
             <h3>EV3 Basketball Robot — Winner</h3>
-            <p class="meta">Dec 2022–Feb 2023 · <a href="https://github.com/HuyHung0/Robot-competition---group-3"
-                target="_blank" rel="noopener">GitHub</a> · <a href="https://gitlab.eurecom.fr/nguyenk/osrobot"
-                target="_blank" rel="noopener">GitLab</a> · <a href="https://ikhwanjohari2.wixsite.com/mysite"
-                target="_blank" rel="noopener">Project site</a></p>
+            <p class="meta">Dec 2022–Feb 2023 · <a href="https://github.com/HuyHung0/Robot-competition---group-3" target="_blank" rel="noopener">GitHub</a> · <a href="https://gitlab.eurecom.fr/nguyenk/osrobot" target="_blank" rel="noopener">GitLab</a> · <a href="https://ikhwanjohari2.wixsite.com/mysite" target="_blank" rel="noopener">Project site</a></p>
             <ul class="bullets">
               <li>Designed and programmed an EV3 Mindstorms robot (attacker/defender); won first prize.</li>
             </ul>
@@ -759,8 +405,7 @@
 
           <article class="card reveal" tabindex="0">
             <h3>Koalert — Web App Design</h3>
-            <p class="meta">Dec 2022–Jan 2023 · <a href="https://gitlab.com/jbuntu/koalert" target="_blank"
-                rel="noopener">GitLab</a></p>
+            <p class="meta">Dec 2022–Jan 2023 · <a href="https://gitlab.com/jbuntu/koalert" target="_blank" rel="noopener">GitLab</a></p>
             <ul class="bullets">
               <li>End-to-end design and development for a modern web application prototype.</li>
             </ul>
@@ -768,10 +413,7 @@
 
           <article class="card reveal" tabindex="0">
             <h3>Cheating in Chess — ML Outlier Detection</h3>
-            <p class="meta">Oct 2022–Jan 2023 · <a href="https://gitlab.eurecom.fr/lehh/malis-project-cheating-in-chess"
-                target="_blank" rel="noopener">GitLab</a> · <a
-                href="https://malis-course.github.io/2022/11/01/final-projects/" target="_blank" rel="noopener">Course
-                showcase</a></p>
+            <p class="meta">Oct 2022–Jan 2023 · <a href="https://gitlab.eurecom.fr/lehh/malis-project-cheating-in-chess" target="_blank" rel="noopener">GitLab</a> · <a href="https://malis-course.github.io/2022/11/01/final-projects/" target="_blank" rel="noopener">Course showcase</a></p>
             <ul class="bullets">
               <li>Applied ML to detect anomalous moves/games; received an honorable mention (Fall 2022 cohort).</li>
             </ul>
@@ -786,23 +428,19 @@
         <h2 class="section-title">Certifications</h2>
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
           <article class="card reveal" tabindex="0">
-            <h4><a href="/resources/certificates/Project_Management_Certification.pdf" target="_blank"
-                rel="noopener">Managing Global Projects</a></h4>
+            <h4><a href="/resources/certificates/Project_Management_Certification.pdf" target="_blank" rel="noopener">Managing Global Projects</a></h4>
             <p class="meta">EURECOM · Issued Jun 30, 2023</p>
           </article>
           <article class="card reveal" tabindex="0">
-            <h4><a href="https://www.udemy.com/certificate/UC-2593d711-0460-4729-86bb-76e063fe7dec/" target="_blank"
-                rel="noopener">Practical Ethical Hacking</a></h4>
+            <h4><a href="https://www.udemy.com/certificate/UC-2593d711-0460-4729-86bb-76e063fe7dec/" target="_blank" rel="noopener">Practical Ethical Hacking</a></h4>
             <p class="meta">Udemy · Issued May 13, 2023</p>
           </article>
           <article class="card reveal" tabindex="0">
-            <h4><a href="https://www.udemy.com/certificate/UC-52ede5e0-c0de-4ff9-82c7-1f3b3ef97a60/" target="_blank"
-                rel="noopener">Learn Ethical Hacking From Scratch</a></h4>
+            <h4><a href="https://www.udemy.com/certificate/UC-52ede5e0-c0de-4ff9-82c7-1f3b3ef97a60/" target="_blank" rel="noopener">Learn Ethical Hacking From Scratch</a></h4>
             <p class="meta">Udemy · Issued Jul 28, 2022</p>
           </article>
           <article class="card reveal" tabindex="0">
-            <h4><a href="https://www.udemy.com/certificate/UC-468167a4-48d1-4a75-ae67-2fd445cab40e/" target="_blank"
-                rel="noopener">Complete Python Bootcamp: Zero to Hero</a></h4>
+            <h4><a href="https://www.udemy.com/certificate/UC-468167a4-48d1-4a75-ae67-2fd445cab40e/" target="_blank" rel="noopener">Complete Python Bootcamp: Zero to Hero</a></h4>
             <p class="meta">Udemy · Issued May 25, 2022</p>
           </article>
         </div>
@@ -818,8 +456,7 @@
           <article class="card reveal" tabindex="0">
             <p>
               Le, H.H. &amp; Ngo Dac, T.
-              <strong><a href="https://doi.org/10.1007/s00209-022-02970-4" target="_blank" rel="noopener">Zeta-like
-                  multiple zeta values in positive characteristic</a></strong>,
+              <strong><a href="https://doi.org/10.1007/s00209-022-02970-4" target="_blank" rel="noopener">Zeta-like multiple zeta values in positive characteristic</a></strong>,
               <em>Mathematische Zeitschrift</em>, 301(2), 2037–2057, 2022.
             </p>
           </article>
@@ -827,8 +464,7 @@
           <article class="card reveal" tabindex="0">
             <p>
               Le, H.H. &amp; Ngo Dac, T.
-              <strong><a href="https://doi.org/10.1090/tran/8357" target="_blank" rel="noopener">On identities for zeta
-                  values in Tate algebras</a></strong>,
+              <strong><a href="https://doi.org/10.1090/tran/8357" target="_blank" rel="noopener">On identities for zeta values in Tate algebras</a></strong>,
               <em>Transactions of the American Mathematical Society</em>, 374(08), 5623–5650, 2021.
             </p>
           </article>
@@ -836,8 +472,7 @@
           <article class="card reveal" tabindex="0">
             <p>
               Le, H.H.
-              <strong><a href="https://www.theses.fr/2021NORMC237#" target="_blank" rel="noopener">On some identities
-                  between special values of L-functions</a></strong>, <em>PhD thesis</em>, 2021.
+              <strong><a href="https://www.theses.fr/2021NORMC237#" target="_blank" rel="noopener">On some identities between special values of L-functions</a></strong>, <em>PhD thesis</em>, 2021.
             </p>
           </article>
         </div>
@@ -850,11 +485,7 @@
         <h2 class="section-title">Other Activities & Interests</h2>
         <div class="card reveal" tabindex="0">
           <ul>
-            <li>Former member of a chess club in Caen (2018–2022); played in <a
-                href="http://www.echecs.asso.fr/Equipes.aspx?Groupe=36" target="_blank" rel="noopener">Interclubs
-                Nationale IV</a>. Profiles: <a href="https://ratings.fide.com/profile/551078511" target="_blank"
-                rel="noopener">FIDE</a>, <a href="https://lichess.org/@/lehuyhung" target="_blank"
-                rel="noopener">Lichess</a>.</li>
+            <li>Former member of a chess club in Caen (2018–2022); played in <a href="http://www.echecs.asso.fr/Equipes.aspx?Groupe=36" target="_blank" rel="noopener">Interclubs Nationale IV</a>. Profiles: <a href="https://ratings.fide.com/profile/551078511" target="_blank" rel="noopener">FIDE</a>, <a href="https://lichess.org/@/lehuyhung" target="_blank" rel="noopener">Lichess</a>.</li>
             <li>Supervisor of a table tennis club at EURECOM.</li>
             <li>CTFs: Tracs (Paris, 2022), Ph0wn (Biot, 2022), plus various online events.</li>
           </ul>
@@ -893,28 +524,28 @@
     revealables.forEach(el => ioReveal.observe(el));
 
     // Scrollspy (fixed header aware)
-    const sectionIDs = ['about', 'education', 'projects', 'certifications', 'publications', 'activities'];
+    const sectionIDs = ['about','education','projects','certifications','publications','activities'];
     const navLinks = [...document.querySelectorAll('nav.menu a')];
     const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
 
     let sectionsData = [];
-    function offsetTop(el) { const r = el.getBoundingClientRect(); return r.top + window.scrollY; }
-    function recalcSections() {
+    function offsetTop(el){ const r = el.getBoundingClientRect(); return r.top + window.scrollY; }
+    function recalcSections(){
       sectionsData = sectionIDs.map(id => {
         const el = document.getElementById(id);
         return el ? { id, top: offsetTop(el) - navH - 8 } : null;
-      }).filter(Boolean).sort((a, b) => a.top - b.top);
+      }).filter(Boolean).sort((a,b)=>a.top-b.top);
     }
-    function setActive() {
+    function setActive(){
       const y = window.scrollY;
       let current = sectionsData[0]?.id;
-      for (const s of sectionsData) { if (y >= s.top) current = s.id; else break; }
+      for (const s of sectionsData){ if (y >= s.top) current = s.id; else break; }
       if (window.innerHeight + y >= document.body.scrollHeight - 2) {
         current = sectionsData[sectionsData.length - 1]?.id;
       }
       navLinks.forEach(a => a.removeAttribute('aria-current'));
       const active = navLinks.find(a => a.getAttribute('href') === '#' + current);
-      if (active) active.setAttribute('aria-current', 'page');
+      if (active) active.setAttribute('aria-current','page');
     }
     const onScroll = () => { setActive(); };
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -927,5 +558,4 @@
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
-
 </html>
