@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Huy Hung Le — Cybersecurity & Red Teaming</title>
-  <meta name="description" content="Personal website of Huy Hung Le — cybersecurity practitioner focused on penetration testing and red teaming; MSc in Digital Security (EURECOM, 2024) and PhD in Mathematics (2021)." />
+  <meta name="description"
+    content="Personal website of Huy Hung Le — cybersecurity practitioner focused on penetration testing and red teaming; MSc in Digital Security (EURECOM, 2024) and PhD in Mathematics (2021)." />
   <meta name="author" content="Huy Hung Le" />
   <link rel="canonical" href="https://huyhung0.github.io/" />
   <meta name="theme-color" content="#0b57d0" />
@@ -13,12 +15,17 @@
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Huy Hung Le" />
-  <meta property="og:description" content="Cybersecurity practitioner focused on penetration testing and red teaming." />
+  <meta property="og:description"
+    content="Cybersecurity practitioner focused on penetration testing and red teaming." />
   <meta property="og:site_name" content="Huy Hung Le" />
   <meta property="og:url" content="https://huyhung0.github.io/" />
   <meta property="og:image" content="/images/lehung.jpg" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -40,206 +47,530 @@
 
   <style>
     :root {
+      /* Colors */
       --bg: #0b0c10;
-      --surface: #111217;
-      --card: #151823;
+      --surface: #0e1016;
       --text: #e6e8ee;
       --muted: #aab0c0;
       --accent: #2f6df6;
       --accent-2: #60a5fa;
-      --border: #232636;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --border: rgba(255, 255, 255, .14);
+      /* Effects */
+      --shadow: 0 12px 40px rgba(0, 0, 0, .35);
       --radius: 18px;
+      --glass: rgba(255, 255, 255, .06);
+      --glass-strong: rgba(255, 255, 255, .10);
+      --backdrop: saturate(130%) blur(12px);
+      /* Layout */
       --maxw: 1100px;
       --nav-h: 72px;
-
-      /* Motion tokens */
-      --easing: cubic-bezier(.22,.61,.36,1);
+      /* Motion */
+      --easing: cubic-bezier(.22, .61, .36, 1);
       --dur-1: 120ms;
-      --dur-2: 200ms;
+      --dur-2: 220ms;
       --dur-3: 520ms;
       --lift: translateY(-4px);
     }
+
     @media (prefers-color-scheme: light) {
       :root {
-        --bg: #ffffff;
-        --surface: #f8fafc;
-        --card: #ffffff;
+        --bg: #f7fafc;
+        --surface: #eef2f6;
         --text: #0f172a;
         --muted: #475569;
-        --accent: #2563eb;
-        --accent-2: #3b82f6;
-        --border: #e2e8f0;
-        --shadow: 0 10px 30px rgba(2,6,23,.06);
+        --border: rgba(15, 23, 42, .12);
+        --glass: rgba(255, 255, 255, .65);
+        --glass-strong: rgba(255, 255, 255, .75);
+        --shadow: 0 12px 40px rgba(2, 6, 23, .08);
       }
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    html { scroll-padding-top: var(--nav-h); }
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    html {
+      scroll-padding-top: var(--nav-h)
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+
     body {
       margin: 0;
-      background:
-        radial-gradient(1200px 800px at 10% -10%, rgba(47,109,246,.15), transparent 50%),
-        radial-gradient(1000px 600px at 100% 10%, rgba(96,165,250,.12), transparent 40%),
-        var(--bg);
       color: var(--text);
-      font: 17px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+      font: 17px/1.65 "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: var(--surface);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-    }
-    @media (max-width: 420px) { body { font-size: 16px; } }
-
-    a { color: var(--accent-2); text-decoration: none; transition: color var(--dur-1) var(--easing); }
-    a:hover { text-decoration: underline; }
-    .container { max-width: var(--maxw); margin-inline: auto; padding-inline: 20px; }
-
-    /* Reduced motion */
-    @media (prefers-reduced-motion: reduce) {
-      * { animation: none !important; transition: none !important; }
+      position: relative;
+      overflow-x: hidden;
+      /* Keep content visible under fixed header */
+      padding-top: var(--nav-h);
     }
 
-    /* Skip link */
-    .skip { position: absolute; left: -9999px; }
-    .skip:focus { left: 12px; top: 12px; background: var(--accent); color: #fff; padding: 8px 12px; border-radius: 8px; z-index: 9999; }
+    /* Animated gradient backdrop */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -20% -20%;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(1200px 800px at 10% -10%, rgba(47, 109, 246, .20), transparent 55%),
+        radial-gradient(1000px 600px at 100% 10%, rgba(96, 165, 250, .15), transparent 45%),
+        conic-gradient(from 0deg at 50% 50%, rgba(47, 109, 246, .10), rgba(96, 165, 250, .12), rgba(47, 109, 246, .08), rgba(96, 165, 250, .10));
+      background-size: 140% 140%, 120% 120%, 200% 200%;
+      filter: saturate(120%);
+      animation: bgShift 28s ease-in-out infinite alternate;
+    }
 
-    /* Header */
+    @keyframes bgShift {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        background-position: 0% 0%, 100% 0%, 50% 50%;
+      }
+
+      50% {
+        transform: translate3d(-1%, -1%, 0) scale(1.01);
+        background-position: 50% 40%, 80% 20%, 60% 40%;
+      }
+
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+        background-position: 0% 10%, 90% 10%, 50% 60%;
+      }
+    }
+
+    a {
+      color: var(--accent-2);
+      text-decoration: none;
+      transition: color var(--dur-1) var(--easing)
+    }
+
+    main a:hover:not(.button) {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: var(--maxw);
+      margin-inline: auto;
+      padding-inline: 20px
+    }
+
+    /* Skip link – only visible on keyboard focus */
+    .skip {
+      position: fixed;
+      left: 12px;
+      top: 12px;
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transform: translateY(-150%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform var(--dur-2) var(--easing), opacity var(--dur-2) var(--easing);
+      z-index: 9999;
+    }
+
+    .skip:focus-visible {
+      transform: none;
+      opacity: 1;
+      pointer-events: auto;
+      text-decoration: none;
+    }
+
+    /* Header – fixed (always visible) + glass */
     header {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: saturate(140%) blur(8px);
-      background: color-mix(in oklab, var(--surface), transparent 20%);
-      border-bottom: 1px solid var(--border);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
       height: var(--nav-h);
-      display: flex; align-items: center;
+      display: flex;
+      align-items: center;
+      background: var(--glass-strong);
+      backdrop-filter: var(--backdrop);
+      border-bottom: 1px solid var(--border);
       transition: background var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing);
     }
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: .3px; }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .2px
+    }
+
     .brand .dot {
-      width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
-      box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent), transparent 80%);
-      animation: pulse 2.4s var(--easing) infinite;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px rgba(47, 109, 246, .18);
+      animation: pulse 2.8s var(--easing) infinite
     }
+
     @keyframes pulse {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent), transparent 80%); }
-      50% { transform: scale(1.05); box-shadow: 0 0 0 6px color-mix(in oklab, var(--accent), transparent 86%); }
+
+      0%,
+      100% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.06)
+      }
     }
 
-    .menu { display: flex; align-items: center; gap: 20px; }
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 22px
+    }
+
     .menu a {
-      color: var(--muted); font-weight: 600; position: relative; padding-bottom: 2px;
+      color: var(--muted);
+      font-weight: 600;
+      position: relative;
+      padding-bottom: 2px
     }
-    /* sliding underline */
+
     .menu a::after {
-      content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 2px;
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 2px;
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      transform: scaleX(0); transform-origin: left;
-      transition: transform var(--dur-2) var(--easing);
-    }
-    .menu a:hover::after, .menu a[aria-current="page"]::after { transform: scaleX(1); }
-    .menu a[aria-current="page"] { color: var(--text); }
-
-    .button {
-      display: inline-flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 12px;
-      border: 1px solid var(--border); background: var(--card); color: var(--text); font-weight: 600;
-      box-shadow: var(--shadow);
-      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing), background-color var(--dur-2) var(--easing);
-    }
-    .button:hover { transform: var(--lift); box-shadow: 0 14px 34px rgba(0,0,0,.35); }
-    .button.primary { background: linear-gradient(180deg, color-mix(in oklab,var(--accent),white 10%), var(--accent)); border: none; color: #fff; }
-
-    .hamburger { display: none; background: none; border: 1px solid var(--border); color: var(--text); font-size: 1rem; width: 40px; height: 40px; border-radius: 10px; transition: transform var(--dur-2) var(--easing); }
-    .hamburger:hover { transform: var(--lift); }
-    @media (max-width: 860px) {
-      .menu { display: none; position: absolute; right: 20px; top: calc(var(--nav-h) - 6px); flex-direction: column; align-items: flex-start; background: var(--card); padding: 16px; border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); }
-      header[data-open="true"] .menu { display: flex; animation: fade-up var(--dur-3) var(--easing) both; }
-      .hamburger { display: inline-grid; place-items: center; }
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--dur-2) var(--easing)
     }
 
-    /* Sections (full-width backgrounds with centered content) */
-    .section { padding: 60px 0; }
-    .section + .section { padding-top: 48px; }
-    .section.alt { background: color-mix(in oklab, var(--surface), transparent 6%); }
+    .menu a:hover::after,
+    .menu a[aria-current="page"]::after {
+      transform: scaleX(1)
+    }
+
+    .menu a[aria-current="page"] {
+      color: var(--text)
+    }
+
+    .hamburger {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--glass);
+      backdrop-filter: var(--backdrop)
+    }
+
+    @media (max-width:860px) {
+      .menu {
+        display: none;
+        position: absolute;
+        right: 20px;
+        top: calc(var(--nav-h) - 6px);
+        flex-direction: column;
+        align-items: flex-start;
+        background: var(--glass-strong);
+        backdrop-filter: var(--backdrop);
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow: var(--shadow)
+      }
+
+      header[data-open="true"] .menu {
+        display: flex;
+        animation: fade-up var(--dur-3) var(--easing) both
+      }
+
+      .hamburger {
+        display: inline-grid;
+        place-items: center
+      }
+    }
+
+    /* Sections */
+    .section {
+      padding: 60px 0
+    }
+
+    .section+.section {
+      padding-top: 48px
+    }
+
+    .section.alt {
+      background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, .02) 8%, transparent 100%)
+    }
 
     /* Hero */
-    .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
-    .hero h1 { font-size: clamp(2rem, 2.4rem + 1.1vw, 3.6rem); line-height: 1.1; margin: 0 0 12px; }
-    .tagline { color: var(--muted); font-size: 1.08rem; margin-bottom: 22px; }
-    .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: center
+    }
 
-    /* Avatar card (bigger + hover) */
-    .avatar-card {
-      background: var(--card);
+    .hero h1 {
+      font-size: clamp(2rem, 2.4rem + 1.1vw, 3.6rem);
+      line-height: 1.1;
+      margin: 0 0 12px
+    }
+
+    .tagline {
+      color: var(--muted);
+      font-size: 1.08rem;
+      margin-bottom: 22px
+    }
+
+    .cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 14px;
       border: 1px solid var(--border);
-      border-radius: 22px;
-      padding: 26px;
+      background: var(--glass);
+      color: var(--text);
+      font-weight: 600;
       box-shadow: var(--shadow);
+      backdrop-filter: var(--backdrop);
+      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing)
+    }
+
+    .button:hover {
+      transform: var(--lift);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, .35)
+    }
+
+    .button.primary {
+      background: linear-gradient(180deg, color-mix(in oklab, var(--accent), white 10%), var(--accent));
+      border: none;
+      color: #fff
+    }
+
+    /* Glass cards (global) */
+    .card,
+    .avatar-card,
+    .timeline-item {
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: var(--backdrop);
+    }
+
+    /* Avatar card (interactive) */
+    .avatar-card {
+      padding: 26px;
       display: grid;
       grid-template-columns: 170px 1fr;
-      gap: 22px; align-items: center;
-      transition: transform var(--dur-3) var(--easing), box-shadow var(--dur-3) var(--easing), border-color var(--dur-2) var(--easing);
-      will-change: transform;
+      gap: 22px;
+      align-items: center;
+      transition: transform var(--dur-3) var(--easing), box-shadow var(--dur-3) var(--easing), border-color var(--dur-2) var(--easing)
     }
+
     .avatar-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 24px 48px rgba(0,0,0,.38);
-      border-color: color-mix(in oklab, var(--accent), var(--border) 60%);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, .38)
     }
+
     .avatar-card img {
-      width: 170px; height: 170px; border-radius: 22px; object-fit: cover; border: 1px solid var(--border);
-      transition: transform var(--dur-3) var(--easing), box-shadow var(--dur-3) var(--easing);
-    }
-    .avatar-card:hover img { transform: scale(1.02); }
-
-    .avatar-card .links { font-size: 1rem; }
-    .inline-icons a { display: inline-flex; align-items: center; gap: 10px; color: var(--text); transition: transform var(--dur-2) var(--easing), color var(--dur-2) var(--easing); }
-    .inline-icons a:hover { color: var(--accent-2); transform: translateX(2px); }
-    .inline-icons svg { width: 22px; height: 22px; opacity: .95; flex: 0 0 22px; }
-
-    @media (max-width: 920px) {
-      .avatar-card { grid-template-columns: 150px 1fr; }
-      .avatar-card img { width: 150px; height: 150px; }
-    }
-    @media (max-width: 720px) {
-      .hero { grid-template-columns: 1fr; }
-      .avatar-card { grid-template-columns: 120px 1fr; }
-      .avatar-card img { width: 120px; height: 120px; }
+      width: 170px;
+      height: 170px;
+      border-radius: 22px;
+      object-fit: cover;
+      border: 1px solid var(--border)
     }
 
-    /* Content elements */
-    .section-title { font-size: 1.45rem; margin: 0 0 18px; letter-spacing: .2px; }
-    .grid { display: grid; gap: 18px; }
+    .avatar-card .links {
+      font-size: 1rem
+    }
+
+    .inline-icons a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      transition: transform var(--dur-2) var(--easing), color var(--dur-2) var(--easing)
+    }
+
+    .inline-icons a:hover {
+      color: var(--accent-2);
+      transform: translateX(2px)
+    }
+
+    .inline-icons svg {
+      width: 22px;
+      height: 22px;
+      opacity: .95;
+      flex: 0 0 22px
+    }
+
+    /* Grids / cards */
+    .grid {
+      display: grid;
+      gap: 18px
+    }
+
     .card {
-      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
-      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing);
+      padding: 20px;
+      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing)
     }
-    .card:hover { transform: var(--lift); box-shadow: 0 18px 38px rgba(0,0,0,.35); border-color: color-mix(in oklab, var(--accent), var(--border) 70%); }
-    .card h3, .card h4 { margin: 0 0 8px; }
-    .meta { color: var(--muted); font-size: .95rem; }
-    .bullets { margin: 10px 0 0; padding-left: 20px; }
 
-    /* Timeline */
-    .timeline { display: grid; gap: 14px; }
+    .card:hover {
+      transform: var(--lift);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, .35);
+      border-color: color-mix(in oklab, var(--accent), #000 70%)
+    }
+
+    .section-title {
+      font-size: 1.45rem;
+      margin: 0 0 18px;
+      letter-spacing: .2px
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: .95rem
+    }
+
+    .bullets {
+      margin: 10px 0 0;
+      padding-left: 20px
+    }
+
+    /* Timeline (Education) – row interactivity */
+    .timeline {
+      display: grid;
+      gap: 14px
+    }
+
     .timeline-item {
-      display: grid; grid-template-columns: 150px 1fr; gap: 18px; align-items: start; padding: 16px;
-      background: var(--card); border: 1px solid var(--border); border-radius: 16px; box-shadow: var(--shadow);
-      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing);
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 16px;
+      transition: transform var(--dur-2) var(--easing), box-shadow var(--dur-2) var(--easing), border-color var(--dur-2) var(--easing), background var(--dur-2) var(--easing);
+      cursor: default;
     }
-    .timeline-item:hover { transform: var(--lift); box-shadow: 0 18px 38px rgba(0,0,0,.35); border-color: color-mix(in oklab, var(--accent), var(--border) 70%); }
-    .timeline-item .year { font-weight: 700; color: var(--muted); }
-    .timeline-item .place a { font-weight: 600; }
-    @media (max-width: 720px) { .timeline-item { grid-template-columns: 1fr; } }
 
-    /* Footer */
-    footer { border-top: 1px solid var(--border); }
-    .foot { display: flex; align-items: center; justify-content: space-between; padding: 24px 0 40px; color: var(--muted); font-size: .98rem; }
+    .timeline-item:hover,
+    .timeline-item:focus-within {
+      transform: var(--lift);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, .35);
+      border-color: color-mix(in oklab, var(--accent), #000 70%);
+      background: linear-gradient(180deg, var(--glass-strong), var(--glass));
+    }
+
+    .timeline-item:focus-visible {
+      outline: 2px solid var(--accent)
+    }
+
+    .timeline-item .year {
+      font-weight: 700;
+      color: var(--muted)
+    }
+
+    .timeline-item .place a {
+      font-weight: 600
+    }
 
     /* Reveal on scroll */
-    .reveal { opacity: 0; transform: translateY(14px) scale(.98); }
-    .reveal.in-view { animation: fade-up var(--dur-3) var(--easing) forwards; }
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px) scale(.98)
+    }
+
+    .reveal.in-view {
+      animation: fade-up var(--dur-3) var(--easing) forwards
+    }
+
     @keyframes fade-up {
-      from { opacity: 0; transform: translateY(14px) scale(.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(.98)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border)
+    }
+
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0 40px;
+      color: var(--muted);
+      font-size: .98rem
+    }
+
+    @media (max-width:920px) {
+      .avatar-card {
+        grid-template-columns: 150px 1fr
+      }
+
+      .avatar-card img {
+        width: 150px;
+        height: 150px
+      }
+    }
+
+    @media (max-width:720px) {
+      .hero {
+        grid-template-columns: 1fr
+      }
+
+      .avatar-card {
+        grid-template-columns: 120px 1fr
+      }
+
+      .avatar-card img {
+        width: 120px;
+        height: 120px
+      }
+
+      body {
+        font-size: 16px
+      }
     }
   </style>
 </head>
@@ -247,6 +578,7 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
+  <!-- Header (fixed) -->
   <header id="top">
     <div class="container nav" role="navigation" aria-label="Primary">
       <div class="brand"><span class="dot" aria-hidden="true"></span><span>Huy Hung Le</span></div>
@@ -269,10 +601,13 @@
       <div class="container hero">
         <div>
           <h1>Cybersecurity & Red Teaming</h1>
-          <p class="tagline">I'm Hung — a cybersecurity practitioner focused on penetration testing, red teaming, and software/firmware analysis. I hold an <strong>MSc in Digital Security</strong> (EURECOM, 2024) and a <strong>PhD in Mathematics</strong> (2021).</p>
+          <p class="tagline">I'm Hung — a cybersecurity practitioner focused on penetration testing, red teaming, and
+            software/firmware analysis. I hold an <strong>MSc in Digital Security</strong> (EURECOM, 2024) and a
+            <strong>PhD in Mathematics</strong> (2021).</p>
           <div class="cta">
             <a class="button" href="https://github.com/huyhung0" target="_blank" rel="noopener">GitHub</a>
-            <a class="button" href="https://www.linkedin.com/in/huy-hung-le-9685b2161/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="button" href="https://www.linkedin.com/in/huy-hung-le-9685b2161/" target="_blank"
+              rel="noopener">LinkedIn</a>
             <a class="button" href="/notes">Notes</a>
           </div>
         </div>
@@ -282,28 +617,39 @@
             <div class="links">
               <div class="inline-icons">
                 <a href="mailto:lehuyhung94@gmail.com" rel="me" aria-label="Email: lehuyhung94@gmail.com">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z"/><path d="m22 6-10 7L2 6"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" />
+                    <path d="m22 6-10 7L2 6" />
+                  </svg>
                   lehuyhung94@gmail.com
                 </a>
               </div>
               <div class="inline-icons">
                 <a href="mailto:huy-hung.le@eurecom.fr" aria-label="Email: huy-hung.le@eurecom.fr">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a 2 2 0 0 1 2-2Z"/><path d="m22 6-10 7L2 6"/></svg>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                    <path d="M4 4h16a2 2 0 0 1 2 2v12a 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a 2 2 0 0 1 2-2Z" />
+                    <path d="m22 6-10 7L2 6" />
+                  </svg>
                   huy-hung.le@eurecom.fr
                 </a>
               </div>
               <div class="inline-icons">
                 <a href="https://github.com/huyhung0" target="_blank" rel="noopener" aria-label="GitHub: huyhung0">
-                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12.7c0 5.4 3.5 10 8.4 11.6.6.1.8-.2.8-.5v-2c-3.4.7-4.1-1.6-4.1-1.6-.5-1.2-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.7 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.4-5.5-6.1 0-1.3.5-2.4 1.2-3.3 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.1 0c2.4-1.5 3.4-1.2 3.4-1.2.7 1.7.2 2.9.2 3.2.8.9 1.2 2 1.2 3.3 0 4.7-2.8 5.8-5.5 6.1.4.3.8 1 .8 2v3c0 .3.2.6.8.5 4.9-1.6 8.4-6.2 8.4-11.6A11.5 11.5 0 0 0 12 .5Z"/></svg>
+                  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                    <path
+                      d="M12 .5A11.5 11.5 0 0 0 .5 12.7c0 5.4 3.5 10 8.4 11.6.6.1.8-.2.8-.5v-2c-3.4.7-4.1-1.6-4.1-1.6-.5-1.2-1.3-1.6-1.3-1.6-1-.7.1-.7.1-.7 1.1.1 1.7 1.1 1.7 1.1 1 1.7 2.7 1.2 3.3.9.1-.7.4-1.2.7-1.5-2.7-.3-5.5-1.4-5.5-6.1 0-1.3.5-2.4 1.2-3.3 0-.3-.5-1.5.2-3.2 0 0 1-.3 3.4 1.2a11.7 11.7 0 0 1 6.1 0c2.4-1.5 3.4-1.2 3.4-1.2.7 1.7.2 2.9.2 3.2.8.9 1.2 2 1.2 3.3 0 4.7-2.8 5.8-5.5 6.1.4.3.8 1 .8 2v3c0 .3.2.6.8.5 4.9-1.6 8.4-6.2 8.4-11.6A11.5 11.5 0 0 0 12 .5Z" />
+                  </svg>
                   github.com/huyhung0
                 </a>
               </div>
               <div class="inline-icons">
-                <a href="https://www.linkedin.com/in/huy-hung-le-9685b2161/" target="_blank" rel="noopener" aria-label="LinkedIn profile">
-                  <!-- Clearer LinkedIn square icon -->
+                <a href="https://www.linkedin.com/in/huy-hung-le-9685b2161/" target="_blank" rel="noopener"
+                  aria-label="LinkedIn profile">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="#0A66C2" d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/>
-                    <path fill="#FFFFFF" d="M5.337 7.433a1.77 1.77 0 1 1 0-3.54 1.77 1.77 0 0 1 0 3.54zM3.76 9h3.151v11.452H3.76V9zm7.395 0h3.025v1.561h.043c.422-.8 1.453-1.642 2.992-1.642 3.2 0 3.787 2.106 3.787 4.852v6.681h-3.046v-5.891c0-1.404-.028-3.211-2.008-3.211-2.01 0-2.317 1.571-2.317 3.101v6.001H11.155V9z"/>
+                    <path fill="#0A66C2"
+                      d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z" />
+                    <path fill="#FFFFFF"
+                      d="M5.337 7.433a1.77 1.77 0 1 1 0-3.54 1.77 1.77 0 0 1 0 3.54zM3.76 9h3.151v11.452H3.76V9zm7.395 0h3.025v1.561h.043c.422-.8 1.453-1.642 2.992-1.642 3.2 0 3.787 2.106 3.787 4.852v6.681h-3.046v-5.891c0-1.404-.028-3.211-2.008-3.211-2.01 0-2.317 1.571-2.317 3.101v6.001H11.155V9z" />
                   </svg>
                   LinkedIn
                 </a>
@@ -314,42 +660,53 @@
       </div>
     </section>
 
-    <!-- Education -->
+    <!-- Education (interactive rows) -->
     <section class="section alt reveal" id="education">
       <div class="container">
         <h2 class="section-title">Education</h2>
         <div class="timeline">
-          <div class="timeline-item reveal">
+          <div class="timeline-item reveal" tabindex="0" role="group"
+            aria-label="MSc in Digital Security at EURECOM, 2022–2024">
             <div class="year">2022–2024</div>
             <div class="place">
-              <strong>MSc in Digital Security</strong> — <a href="https://www.eurecom.fr/en" target="_blank" rel="noopener">EURECOM</a>, Biot, France
+              <strong>MSc in Digital Security</strong> — <a href="https://www.eurecom.fr/en" target="_blank"
+                rel="noopener">EURECOM</a>, Biot, France
             </div>
           </div>
-          <div class="timeline-item reveal">
+          <div class="timeline-item reveal" tabindex="0" role="group"
+            aria-label="PhD in Mathematics, Université de Caen Normandie, 2018–2021">
             <div class="year">2018–2021</div>
             <div class="place">
-              <strong>PhD in Mathematics</strong> — <a href="https://www.unicaen.fr/" target="_blank" rel="noopener">Université de Caen Normandie</a>, Caen, France
+              <strong>PhD in Mathematics</strong> — <a href="https://www.unicaen.fr/" target="_blank"
+                rel="noopener">Université de Caen Normandie</a>, Caen, France
             </div>
           </div>
-          <div class="timeline-item reveal">
+          <div class="timeline-item reveal" tabindex="0" role="group"
+            aria-label="M2 in Mathematics, Institut Fourier, 2017–2018">
             <div class="year">2017–2018</div>
             <div class="place">
-              <strong>M2 in Mathematics</strong> — <a href="https://www-fourier.ujf-grenoble.fr/" target="_blank" rel="noopener">Institut Fourier</a>, Grenoble, France
+              <strong>M2 in Mathematics</strong> — <a href="https://www-fourier.ujf-grenoble.fr/" target="_blank"
+                rel="noopener">Institut Fourier</a>, Grenoble, France
             </div>
           </div>
-          <div class="timeline-item reveal">
+          <div class="timeline-item reveal" tabindex="0" role="group"
+            aria-label="M1 in Mathematics, Institute of Mathematics, 2016–2017">
             <div class="year">2016–2017</div>
             <div class="place">
-              <strong>M1 in Mathematics</strong> — <a href="http://math.ac.vn/en/trang-chu/gioi-thieu-vien-toan.html" target="_blank" rel="noopener">Institute of Mathematics</a>, Hanoi, Vietnam
+              <strong>M1 in Mathematics</strong> — <a href="http://math.ac.vn/en/trang-chu/gioi-thieu-vien-toan.html"
+                target="_blank" rel="noopener">Institute of Mathematics</a>, Hanoi, Vietnam
             </div>
           </div>
-          <div class="timeline-item reveal">
+          <div class="timeline-item reveal" tabindex="0" role="group"
+            aria-label="BSc in Mathematics, University of Science, 2012–2016">
             <div class="year">2012–2016</div>
             <div class="place">
-              <strong>BSc in Mathematics</strong> — <a href="https://hus.vnu.edu.vn/" target="_blank" rel="noopener">University of Science</a>, Hanoi, Vietnam
+              <strong>BSc in Mathematics</strong> — <a href="https://hus.vnu.edu.vn/" target="_blank"
+                rel="noopener">University of Science</a>, Hanoi, Vietnam
             </div>
           </div>
-          <div class="timeline-item reveal">
+          <div class="timeline-item reveal" tabindex="0" role="group"
+            aria-label="Tran Phu Gifted High School, 2009–2012">
             <div class="year">2009–2012</div>
             <div class="place">
               <strong>High School</strong> — Tran Phu Gifted High School, Haiphong, Vietnam
@@ -364,44 +721,57 @@
       <div class="container">
         <h2 class="section-title">Selected Projects</h2>
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>pestudio-cli — PE Static Analysis</h3>
-            <p class="meta">June–July 2023 · <a href="https://github.com/HuyHung0/pestudio-cli" target="_blank" rel="noopener">GitHub</a></p>
+            <p class="meta">June–July 2023 · <a href="https://github.com/HuyHung0/pestudio-cli" target="_blank"
+                rel="noopener">GitHub</a></p>
             <ul class="bullets">
               <li>Revived a Python CLI to scan Portable Executable (PE) files for known malicious patterns.</li>
               <li>Fixed breaking changes in dependencies and refreshed threat signature databases.</li>
-              <li>Added <em>hole detection</em> to flag data outside section boundaries; improved output and documentation.</li>
+              <li>Added <em>hole detection</em> to flag data outside section boundaries; improved output and
+                documentation.</li>
             </ul>
           </article>
 
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>BLE OTA Firmware Update Security</h3>
-            <p class="meta">Mar–Jun 2023 · <a href="https://github.com/HuyHung0/Spring2023---Security-Analysis-Of-Bluetooth-Low-Energy-Over-The-Air-Firmware-Updates" target="_blank" rel="noopener">GitHub</a> · <a href="https://gitlab.eurecom.fr/lehh/spring2023-Security-analysis-of-Bluetooth-low-energy-Over-the-Air-firmware-updates" target="_blank" rel="noopener">GitLab</a></p>
+            <p class="meta">Mar–Jun 2023 · <a
+                href="https://github.com/HuyHung0/Spring2023---Security-Analysis-Of-Bluetooth-Low-Energy-Over-The-Air-Firmware-Updates"
+                target="_blank" rel="noopener">GitHub</a> · <a
+                href="https://gitlab.eurecom.fr/lehh/spring2023-Security-analysis-of-Bluetooth-low-energy-Over-the-Air-firmware-updates"
+                target="_blank" rel="noopener">GitLab</a></p>
             <ul class="bullets">
               <li>Reverse-engineered Nordic nRF51/nRF52 BLE DFU protocol and update workflow.</li>
               <li>Assessed integrity/authentication of OTA updates; developed proof-of-concept analysis tooling.</li>
             </ul>
           </article>
 
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>EV3 Basketball Robot — Winner</h3>
-            <p class="meta">Dec 2022–Feb 2023 · <a href="https://github.com/HuyHung0/Robot-competition---group-3" target="_blank" rel="noopener">GitHub</a> · <a href="https://gitlab.eurecom.fr/nguyenk/osrobot" target="_blank" rel="noopener">GitLab</a> · <a href="https://ikhwanjohari2.wixsite.com/mysite" target="_blank" rel="noopener">Project site</a></p>
+            <p class="meta">Dec 2022–Feb 2023 · <a href="https://github.com/HuyHung0/Robot-competition---group-3"
+                target="_blank" rel="noopener">GitHub</a> · <a href="https://gitlab.eurecom.fr/nguyenk/osrobot"
+                target="_blank" rel="noopener">GitLab</a> · <a href="https://ikhwanjohari2.wixsite.com/mysite"
+                target="_blank" rel="noopener">Project site</a></p>
             <ul class="bullets">
               <li>Designed and programmed an EV3 Mindstorms robot (attacker/defender); won first prize.</li>
             </ul>
           </article>
 
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Koalert — Web App Design</h3>
-            <p class="meta">Dec 2022–Jan 2023 · <a href="https://gitlab.com/jbuntu/koalert" target="_blank" rel="noopener">GitLab</a></p>
+            <p class="meta">Dec 2022–Jan 2023 · <a href="https://gitlab.com/jbuntu/koalert" target="_blank"
+                rel="noopener">GitLab</a></p>
             <ul class="bullets">
               <li>End-to-end design and development for a modern web application prototype.</li>
             </ul>
           </article>
 
-          <article class="card reveal">
+          <article class="card reveal" tabindex="0">
             <h3>Cheating in Chess — ML Outlier Detection</h3>
-            <p class="meta">Oct 2022–Jan 2023 · <a href="https://gitlab.eurecom.fr/lehh/malis-project-cheating-in-chess" target="_blank" rel="noopener">GitLab</a> · <a href="https://malis-course.github.io/2022/11/01/final-projects/" target="_blank" rel="noopener">Course showcase</a></p>
+            <p class="meta">Oct 2022–Jan 2023 · <a href="https://gitlab.eurecom.fr/lehh/malis-project-cheating-in-chess"
+                target="_blank" rel="noopener">GitLab</a> · <a
+                href="https://malis-course.github.io/2022/11/01/final-projects/" target="_blank" rel="noopener">Course
+                showcase</a></p>
             <ul class="bullets">
               <li>Applied ML to detect anomalous moves/games; received an honorable mention (Fall 2022 cohort).</li>
             </ul>
@@ -410,46 +780,67 @@
       </div>
     </section>
 
-    <!-- Certifications -->
+    <!-- Certifications (interactive cards) -->
     <section class="section alt reveal" id="certifications">
       <div class="container">
         <h2 class="section-title">Certifications</h2>
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
-          <article class="card reveal">
-            <h4><a href="/resources/certificates/Project_Management_Certification.pdf" target="_blank" rel="noopener">Managing Global Projects</a></h4>
+          <article class="card reveal" tabindex="0">
+            <h4><a href="/resources/certificates/Project_Management_Certification.pdf" target="_blank"
+                rel="noopener">Managing Global Projects</a></h4>
             <p class="meta">EURECOM · Issued Jun 30, 2023</p>
           </article>
-          <article class="card reveal">
-            <h4><a href="https://www.udemy.com/certificate/UC-2593d711-0460-4729-86bb-76e063fe7dec/" target="_blank" rel="noopener">Practical Ethical Hacking</a></h4>
+          <article class="card reveal" tabindex="0">
+            <h4><a href="https://www.udemy.com/certificate/UC-2593d711-0460-4729-86bb-76e063fe7dec/" target="_blank"
+                rel="noopener">Practical Ethical Hacking</a></h4>
             <p class="meta">Udemy · Issued May 13, 2023</p>
           </article>
-          <article class="card reveal">
-            <h4><a href="https://www.udemy.com/certificate/UC-52ede5e0-c0de-4ff9-82c7-1f3b3ef97a60/" target="_blank" rel="noopener">Learn Ethical Hacking From Scratch</a></h4>
+          <article class="card reveal" tabindex="0">
+            <h4><a href="https://www.udemy.com/certificate/UC-52ede5e0-c0de-4ff9-82c7-1f3b3ef97a60/" target="_blank"
+                rel="noopener">Learn Ethical Hacking From Scratch</a></h4>
             <p class="meta">Udemy · Issued Jul 28, 2022</p>
           </article>
-          <article class="card reveal">
-            <h4><a href="https://www.udemy.com/certificate/UC-468167a4-48d1-4a75-ae67-2fd445cab40e/" target="_blank" rel="noopener">Complete Python Bootcamp: Zero to Hero</a></h4>
+          <article class="card reveal" tabindex="0">
+            <h4><a href="https://www.udemy.com/certificate/UC-468167a4-48d1-4a75-ae67-2fd445cab40e/" target="_blank"
+                rel="noopener">Complete Python Bootcamp: Zero to Hero</a></h4>
             <p class="meta">Udemy · Issued May 25, 2022</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Publications -->
+    <!-- Publications (each paper in its own card) -->
     <section class="section reveal" id="publications">
       <div class="container">
         <h2 class="section-title">Publications</h2>
-        <ul class="card pubs reveal">
-          <li>
-            Le, H.H. &amp; Ngo Dac, T. <strong><a href="https://doi.org/10.1007/s00209-022-02970-4" target="_blank" rel="noopener">Zeta-like multiple zeta values in positive characteristic</a></strong>, <em>Mathematische Zeitschrift</em>, 301(2), 2037–2057, 2022.
-          </li>
-          <li>
-            Le, H.H. &amp; Ngo Dac, T. <strong><a href="https://doi.org/10.1090/tran/8357" target="_blank" rel="noopener">On identities for zeta values in Tate algebras</a></strong>, <em>Transactions of the American Mathematical Society</em>, 374(08), 5623–5650, 2021.
-          </li>
-          <li>
-            Le, H.H. <strong><a href="https://www.theses.fr/2021NORMC237#" target="_blank" rel="noopener">On some identities between special values of L-functions</a></strong>, <em>PhD thesis</em>, 2021.
-          </li>
-        </ul>
+
+        <div class="grid" style="grid-template-columns: 1fr;">
+          <article class="card reveal" tabindex="0">
+            <p>
+              Le, H.H. &amp; Ngo Dac, T.
+              <strong><a href="https://doi.org/10.1007/s00209-022-02970-4" target="_blank" rel="noopener">Zeta-like
+                  multiple zeta values in positive characteristic</a></strong>,
+              <em>Mathematische Zeitschrift</em>, 301(2), 2037–2057, 2022.
+            </p>
+          </article>
+
+          <article class="card reveal" tabindex="0">
+            <p>
+              Le, H.H. &amp; Ngo Dac, T.
+              <strong><a href="https://doi.org/10.1090/tran/8357" target="_blank" rel="noopener">On identities for zeta
+                  values in Tate algebras</a></strong>,
+              <em>Transactions of the American Mathematical Society</em>, 374(08), 5623–5650, 2021.
+            </p>
+          </article>
+
+          <article class="card reveal" tabindex="0">
+            <p>
+              Le, H.H.
+              <strong><a href="https://www.theses.fr/2021NORMC237#" target="_blank" rel="noopener">On some identities
+                  between special values of L-functions</a></strong>, <em>PhD thesis</em>, 2021.
+            </p>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -457,9 +848,13 @@
     <section class="section alt reveal" id="activities">
       <div class="container">
         <h2 class="section-title">Other Activities & Interests</h2>
-        <div class="card reveal">
+        <div class="card reveal" tabindex="0">
           <ul>
-            <li>Former member of a chess club in Caen (2018–2022); played in <a href="http://www.echecs.asso.fr/Equipes.aspx?Groupe=36" target="_blank" rel="noopener">Interclubs Nationale IV</a>. Profiles: <a href="https://ratings.fide.com/profile/551078511" target="_blank" rel="noopener">FIDE</a>, <a href="https://lichess.org/@/lehuyhung" target="_blank" rel="noopener">Lichess</a>.</li>
+            <li>Former member of a chess club in Caen (2018–2022); played in <a
+                href="http://www.echecs.asso.fr/Equipes.aspx?Groupe=36" target="_blank" rel="noopener">Interclubs
+                Nationale IV</a>. Profiles: <a href="https://ratings.fide.com/profile/551078511" target="_blank"
+                rel="noopener">FIDE</a>, <a href="https://lichess.org/@/lehuyhung" target="_blank"
+                rel="noopener">Lichess</a>.</li>
             <li>Supervisor of a table tennis club at EURECOM.</li>
             <li>CTFs: Tracs (Paris, 2022), Ph0wn (Biot, 2022), plus various online events.</li>
           </ul>
@@ -485,24 +880,6 @@
       btn.setAttribute('aria-expanded', String(!open));
     });
 
-    // Active menu highlight on scroll
-    const sections = ['about','education','projects','certifications','publications','activities']
-      .map(id => document.getElementById(id))
-      .filter(Boolean);
-    const links = [...document.querySelectorAll('nav.menu a')];
-
-    const ioActive = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          links.forEach(a => a.removeAttribute('aria-current'));
-          const active = links.find(a => a.getAttribute('href') === '#' + id);
-          if (active) active.setAttribute('aria-current', 'page');
-        }
-      });
-    }, { rootMargin: '-40% 0px -50% 0px', threshold: 0.01 });
-    sections.forEach(s => ioActive.observe(s));
-
     // Reveal-on-scroll
     const revealables = document.querySelectorAll('.reveal');
     const ioReveal = new IntersectionObserver((entries, obs) => {
@@ -515,8 +892,40 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -10% 0px' });
     revealables.forEach(el => ioReveal.observe(el));
 
-    // Year in footer
+    // Scrollspy (fixed header aware)
+    const sectionIDs = ['about', 'education', 'projects', 'certifications', 'publications', 'activities'];
+    const navLinks = [...document.querySelectorAll('nav.menu a')];
+    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
+
+    let sectionsData = [];
+    function offsetTop(el) { const r = el.getBoundingClientRect(); return r.top + window.scrollY; }
+    function recalcSections() {
+      sectionsData = sectionIDs.map(id => {
+        const el = document.getElementById(id);
+        return el ? { id, top: offsetTop(el) - navH - 8 } : null;
+      }).filter(Boolean).sort((a, b) => a.top - b.top);
+    }
+    function setActive() {
+      const y = window.scrollY;
+      let current = sectionsData[0]?.id;
+      for (const s of sectionsData) { if (y >= s.top) current = s.id; else break; }
+      if (window.innerHeight + y >= document.body.scrollHeight - 2) {
+        current = sectionsData[sectionsData.length - 1]?.id;
+      }
+      navLinks.forEach(a => a.removeAttribute('aria-current'));
+      const active = navLinks.find(a => a.getAttribute('href') === '#' + current);
+      if (active) active.setAttribute('aria-current', 'page');
+    }
+    const onScroll = () => { setActive(); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', () => { recalcSections(); setActive(); });
+    window.addEventListener('orientationchange', () => { recalcSections(); setActive(); });
+    window.addEventListener('load', () => { recalcSections(); setActive(); });
+    if (document.fonts && document.fonts.ready) { document.fonts.ready.then(() => { recalcSections(); setActive(); }); }
+
+    // Footer year
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
+
 </html>
