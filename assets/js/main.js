@@ -49,7 +49,7 @@ const ioReveal = new IntersectionObserver((entries, obs) => {
 revealables.forEach(el => ioReveal.observe(el));
 
 // Scrollspy (fixed header aware)
-const sectionIDs = ['about','education','projects','certifications','publications','activities'];
+const sectionIDs = ['about','education','experience','projects','certifications','publications','legal','activities'];
 const navLinks = [...document.querySelectorAll('nav.menu a')];
 const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
 
