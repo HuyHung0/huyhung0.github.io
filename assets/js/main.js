@@ -1,7 +1,5 @@
 'use strict';
 
-'use strict';
-
 // Mobile nav toggle + scrim + no background scroll
 const header = document.querySelector('header');
 const btn = document.querySelector('.hamburger');
@@ -49,7 +47,7 @@ const ioReveal = new IntersectionObserver((entries, obs) => {
 revealables.forEach(el => ioReveal.observe(el));
 
 // Scrollspy (fixed header aware)
-const sectionIDs = ['about','education','experience','projects','certifications','publications','legal','activities'];
+const sectionIDs = ['about','experience','education','projects','certifications','publications','activities'];
 const navLinks = [...document.querySelectorAll('nav.menu a')];
 const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
 
